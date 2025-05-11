@@ -413,7 +413,7 @@
 
   set page(
     paper: paper-size,
-    margin: (left: 12mm, right: 12mm, top: 8mm, bottom: 12mm),
+    margin: (left: 12mm, right: 12mm, top: 10mm, bottom: 12mm),
     footer: [
       #set text(size: 0.7em, fill: font-color.lighten(50%))
 

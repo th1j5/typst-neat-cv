@@ -1,4 +1,4 @@
-#import "../lib.typ": cv, side, entry, item-with-level, publications, social-links, item-pills, contact-info
+#import "@preview/neat-cv:0.1.0": cv, side, entry, item-with-level, publications, social-links, item-pills, contact-info
 
 #show: cv.with(
   author: (
@@ -11,12 +11,21 @@
     website: "https://docbrownlabs.com",
     twitter: "docbrown1955",
     mastodon: "@docbrown@sciences.social",
+    // github: "",
+    // gitlab: "",
     linkedin: "emmett-brown-hv",
     researchgate: "emmett-brown",
+    // scholar: "",
     orcid: "0000-0000-0000-1955",
   ),
   profile-picture: image("profile.png"),
   accent-color: rgb("#4682b4"),
+  // font-color: rgb("#333333"),
+  // date: datetime.today().display("[month repr:long] [year]"),
+  // heading-font: "Fira Sans",
+  // body-font: ("Noto Sans", "Roboto"),
+  // paper-size: "us-letter",
+  // side-width: 4cm,
 )
 
 #side[
@@ -41,6 +50,7 @@
   #v(1fr)
   #social-links()
 
+  // Use colbreak() to insert a page break
   #colbreak()
 
   = Languages
@@ -217,7 +227,7 @@
 
 #publications(
   "publications.yml",
-  highlight-authors: ("Brown, Emmett", "Emmett Brown"),
+  highlight-authors: ("Brown, Emmett", "Brown, Emmett Lathrop"),
 )
 
 = References
@@ -241,4 +251,3 @@
     Contact: #link("mailto:clara.clayton@hillvalley.edu", "clara.clayton@hillvalley.edu")
   ],
 )
-

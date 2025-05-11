@@ -3,7 +3,7 @@ brown1985flux:
   title: "The Flux Capacitor: Principles and Applications in Temporal Mechanics"
   author:
   - Brown, Emmett
-  - McFly, Marty
+  - von Braun, Helga
   date: 1985
   page-range: 1-22
   serial-number:
@@ -17,8 +17,9 @@ brown1985paradoxes:
   type: article
   title: "Temporal Paradoxes: Field Observations and Theoretical Implications"
   author:
-  - Brown, Emmett
-  - McFly, Marty
+  - Brown, Emmett Lathrop
+  - von Braun, Helga
+  - Singh, Rajiv
   date: 1985
   page-range: 23-38
   serial-number:
@@ -34,6 +35,7 @@ brown1986paradox:
   author:
   - Clayton, Clara
   - Brown, Emmett
+  - Singh, Rajiv
   date: 1986
   page-range: 23-40
   serial-number:
@@ -49,6 +51,7 @@ brown1986entropy:
   author:
   - Brown, Emmett
   - Clayton, Clara
+  - O'Connell, Siobhan
   date: 1986
   page-range: 41-55
   serial-number:
@@ -64,7 +67,7 @@ brown1987energy:
   author:
   - Brown, Emmett
   - Clayton, Clara
-  - McFly, Marty
+  - O'Connell, Siobhan
   date: 1987
   page-range: 41-60
   serial-number:
@@ -80,7 +83,7 @@ brown1987safety:
   author:
   - Clayton, Clara
   - Brown, Emmett
-  - McFly, Marty
+  - Singh, Rajiv
   date: 1987
   page-range: 61-75
   serial-number:
@@ -94,8 +97,9 @@ brown1988delorean:
   type: article
   title: "Automotive Engineering for Time Travel: The DeLorean Case Study"
   author:
-  - McFly, Marty
   - Brown, Emmett
+  - McFly, Marty
+  - O'Connell, Siobhan
   date: 1988
   page-range: 61-80
   serial-number:
@@ -111,6 +115,7 @@ brown1989steam:
   author:
   - Brown, Emmett
   - Clayton, Clara
+  - von Braun, Helga
   date: 1989
   page-range: 81-100
   serial-number:
@@ -127,6 +132,7 @@ brown1990ethics:
   - Clayton, Clara
   - Brown, Emmett
   - McFly, Marty
+  - Singh, Rajiv
   date: 1990
   page-range: 101-120
   serial-number:
