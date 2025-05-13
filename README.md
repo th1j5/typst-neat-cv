@@ -87,4 +87,4 @@ For a more complete example, see the `template/cv.typ` file in the repository.
 
 |                               |                               |
 | ----------------------------- | ----------------------------- |
-| ![CV Page 1](assets/cv1.webp) | ![CV Page 2](assets/cv2.webp) |
+| ![CV Page 1](assets/cv_p1.png) | ![CV Page 2](assets/cv_p2.png) |
