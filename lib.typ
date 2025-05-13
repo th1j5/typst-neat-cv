@@ -323,12 +323,12 @@
 }
 
 /// Displays publications grouped by year from a Hayagriva YAML file.
-/// - file (string): Path to Hayagriva YAML file
+/// - yaml-data (dictionary): Data loaded from YAML file
 /// - highlight-authors (array): Authors to highlight
 /// - max-authors (int): Max authors to display per entry
-#let publications(file, highlight-authors: (), max-authors: 10) = context {
+#let publications(yaml-data, highlight-authors: (), max-authors: 10) = context {
   let theme = __st-theme.final()
-  let publication-data = yaml(file).values()
+  let publication-data = yaml-data.values()
   let publications-by-year = (:)
 
   set block(above: 0.7em)

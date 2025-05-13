@@ -226,7 +226,7 @@
 = Publications
 
 #publications(
-  "publications.yml",
+  yaml("publications.yml"),
   highlight-authors: ("Brown, Emmett", "Brown, Emmett Lathrop"),
 )
 
