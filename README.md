@@ -3,6 +3,7 @@
 A modern and elegant CV template for Typst, inspired by [Awesome CV](https://github.com/posquit0/Awesome-CV) and [simple-hipstercv](https://github.com/latex-ninja/simple-hipstercv).
 
 ## Features
+
 - Modern, clean two-column layout with sidebar
 - Customizable accent color and fonts
 - Publication list generated from Hayagriva YAML, grouped by year, with author highlighting
@@ -12,11 +13,14 @@ A modern and elegant CV template for Typst, inspired by [Awesome CV](https://git
 ## Requirements
 
 ### Software
+
 - [typst](https://typst.app/) (tested with v0.13.1)
 
 ### Fonts
+
 By default, this template uses the Fira Sans and Noto Sans fonts. You will need to install these fonts on your system to use the template as intended.
 One option is to download them from Google Fonts:
+
 - [Fira Sans](https://fonts.google.com/specimen/Fira+Sans)
 - [Noto Sans](https://fonts.google.com/specimen/Noto+Sans)
 
@@ -85,6 +89,6 @@ For a more complete example, see the `template/cv.typ` file in the repository.
 
 ## Example
 
-|                               |                               |
-| ----------------------------- | ----------------------------- |
+|                                |                                |
+| ------------------------------ | ------------------------------ |
 | ![CV Page 1](assets/cv_p1.png) | ![CV Page 2](assets/cv_p2.png) |
