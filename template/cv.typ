@@ -160,51 +160,47 @@
 = Grants and Awards
 
 #entry(
-  title: "National Science Foundation Grant",
-  date: "1982",
-  institution: "NSF",
-  location: "USA",
-)[
-  Grant for research on high-energy particle acceleration and temporal field theory.
-]
-
-#entry(
-  title: "Hill Valley Science Achievement Award",
-  date: "1985",
-  institution: "Hill Valley Science Society",
-  location: "Hill Valley, CA, USA",
-)[
-  Awarded for outstanding contributions to science and innovation in the community.
-]
-
-#entry(
   title: "Lifetime Achievement in Innovation",
   date: "1990",
   institution: "International Society of Inventors",
   location: "Geneva, Switzerland",
-)[
-  Recognized for a lifetime of inventive contributions to science and engineering.
-]
+  "Recognized for a lifetime of inventive contributions to science and engineering."
+)
 
 #entry(
   title: "Best Experimental Demonstration",
   date: "1986",
   institution: "World Science Congress",
   location: "London, UK",
-)[
-  Awarded for the live demonstration of the DeLorean Time Machine prototype.
-]
+  "Awarded for the live demonstration of the DeLorean Time Machine prototype."
+)
+
+#entry(
+  title: "Hill Valley Science Achievement Award",
+  date: "1985",
+  institution: "Hill Valley Science Society",
+  location: "Hill Valley, CA, USA",
+  "Awarded for outstanding contributions to science and innovation in the community."
+)
+
+#entry(
+  title: "National Science Foundation Grant",
+  date: "1982",
+  institution: "NSF",
+  location: "USA",
+  "Grant for research on high-energy particle acceleration and temporal field theory."
+)
 
 #colbreak()
 
 = Talks
 
 #entry(
-  title: "The Flux Capacitor: A New Era in Temporal Mechanics",
-  date: "1985",
-  institution: "International Physics Symposium",
-  location: "Geneva, Switzerland",
-  "Keynote on the invention and implications of the flux capacitor.",
+  title: "From DeLorean to Locomotive: Engineering Time Machines",
+  date: "1991",
+  institution: "Society of Inventors Annual Meeting",
+  location: "San Francisco, CA, USA",
+  "Panelist on the evolution of time travel technology.",
 )
 
 #entry(
@@ -216,11 +212,11 @@
 )
 
 #entry(
-  title: "From DeLorean to Locomotive: Engineering Time Machines",
-  date: "1991",
-  institution: "Society of Inventors Annual Meeting",
-  location: "San Francisco, CA, USA",
-  "Panelist on the evolution of time travel technology.",
+  title: "The Flux Capacitor: A New Era in Temporal Mechanics",
+  date: "1985",
+  institution: "International Physics Symposium",
+  location: "Geneva, Switzerland",
+  "Keynote on the invention and implications of the flux capacitor.",
 )
 
 = Publications
