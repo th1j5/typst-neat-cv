@@ -1,0 +1,45 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "template/cv.typ"
+      - "lib.typ"
+      - ".github/workflows/cv.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  format-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Format with typstyle
+        uses: grayespinoza/typstyle-action@main
+
+      - name: Commit formatted files
+        uses: stefanzweifel/git-auto-commit-action@master
+        with:
+          commit_message: "Formatted using typstyle"
+
+      - name: Set up Just
+        uses: extractions/setup-just@v3
+
+      - name: Set up Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Use local package
+        run: |
+          sed -i 's/#import .*/#import "..\/lib.typ": */' template/cv.typ
+
+      - name: Compile CV
+        run: just
+
+      - name: Upload CV artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv
+          path: template/cv.pdf
+          retention-days: 7
