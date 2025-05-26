@@ -50,7 +50,7 @@ jobs:
 
       - name: Use local package
         run: |
-          sed -i 's/#import .*/#import "..\/lib.typ": */' template/cv.typ
+          sed -i 's|#import "@preview/neat-cv:[0-9.]\+"|#import "../lib.typ"|' template/cv.typ | head
 
       - name: Compile CV
         run: just
