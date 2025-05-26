@@ -35,15 +35,17 @@ jobs:
           mkdir -p ~/.local/share/fonts
           mv ~/.fontist/fonts/* ~/.local/share/fonts
 
-      - name: Install Font Awesome
+      - name: Setup Font Awesome
         run: |
-          sudo apt-get update
-          sudo apt-get install fonts-font-awesome
+          export FA_VERSION=6.7.2
+          wget https://github.com/FortAwesome/Font-Awesome/releases/download/${FA_VERSION}/fontawesome-free-${FA_VERSION}-desktop.zip
+          unzip fontawesome-free-${FA_VERSION}-desktop.zip
+          mv fontawesome-free-${FA_VERSION}-desktop/otfs/*.otf ~/.local/share/fonts
 
-      - name: Set up Just
+      - name: Setup Just
         uses: extractions/setup-just@v3
 
-      - name: Set up Typst
+      - name: Setup Typst
         uses: typst-community/setup-typst@v4
 
       - name: Use local package
