@@ -34,7 +34,7 @@ Refer to the package documentation for instructions on installing the fonts on y
 Basic usage example:
 
 ```typst
-#import "@preview/neat-cv:0.1.0": cv, side, entry, item-with-level, contact-info
+#import "@preview/neat-cv:0.1.0": cv, side, entry, item-with-level, contact-info, social-links
 
 #show: cv.with(
   author: (
