@@ -22,7 +22,21 @@ jobs:
       - name: Commit formatted files
         uses: stefanzweifel/git-auto-commit-action@master
         with:
-          commit_message: "Formatted using typstyle"
+          commit_message: "chore: Formatted using typstyle"
+
+      - name: Setup Fontist
+        uses: fontist/setup-fontist@v2
+
+      - name: Install fonts
+        run: |
+          fontist install 'Noto Sans'
+          fontist install 'Fira Sans'
+          fontist install 'Roboto'
+
+      - name: Install Font Awesome
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-font-awesome
 
       - name: Set up Just
         uses: extractions/setup-just@v3
