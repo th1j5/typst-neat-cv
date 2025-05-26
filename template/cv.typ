@@ -1,4 +1,7 @@
-#import "@preview/neat-cv:0.1.0": cv, side, entry, item-with-level, publications, social-links, item-pills, contact-info
+#import "@preview/neat-cv:0.1.0": (
+  contact-info, cv, entry, item-pills, item-with-level, publications, side,
+  social-links,
+)
 
 #show: cv.with(
   author: (
@@ -30,7 +33,8 @@
 
 #side[
   = About me
-  Visionary inventor and theoretical physicist, renowned for pioneering work in time travel, flux capacitor technology, and unconventional scientific research. Adept at creative problem-solving, interdisciplinary collaboration, and pushing the boundaries of known science.
+  Visionary inventor and theoretical physicist, renowned for pioneering work in time travel, flux capacitor technology, and unconventional scientific research.
+  Adept at creative problem-solving, interdisciplinary collaboration, and pushing the boundaries of known science.
 
   = Interests
   - Temporal Mechanics
@@ -164,7 +168,7 @@
   date: "1990",
   institution: "International Society of Inventors",
   location: "Geneva, Switzerland",
-  "Recognized for a lifetime of inventive contributions to science and engineering."
+  "Recognized for a lifetime of inventive contributions to science and engineering.",
 )
 
 #entry(
@@ -172,7 +176,7 @@
   date: "1986",
   institution: "World Science Congress",
   location: "London, UK",
-  "Awarded for the live demonstration of the DeLorean Time Machine prototype."
+  "Awarded for the live demonstration of the DeLorean Time Machine prototype.",
 )
 
 #entry(
@@ -180,7 +184,7 @@
   date: "1985",
   institution: "Hill Valley Science Society",
   location: "Hill Valley, CA, USA",
-  "Awarded for outstanding contributions to science and innovation in the community."
+  "Awarded for outstanding contributions to science and innovation in the community.",
 )
 
 #entry(
@@ -188,7 +192,7 @@
   date: "1982",
   institution: "NSF",
   location: "USA",
-  "Grant for research on high-energy particle acceleration and temporal field theory."
+  "Grant for research on high-energy particle acceleration and temporal field theory.",
 )
 
 #colbreak()
@@ -221,10 +225,10 @@
 
 = Publications
 
-#publications(
-  yaml("publications.yml"),
-  highlight-authors: ("Brown, Emmett", "Brown, Emmett Lathrop"),
-)
+#publications(yaml("publications.yml"), highlight-authors: (
+  "Brown, Emmett",
+  "Brown, Emmett Lathrop",
+))
 
 = References
 

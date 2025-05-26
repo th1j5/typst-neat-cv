@@ -32,18 +32,10 @@
 
   set text(size: 0.95em)
 
-  block(
-    width: 100%,
-    height: size,
-    radius: 0.6em,
-    align(
-      horizon,
-      [
-        #__fa-icon-outline(icon, size: size)
-        #box(inset: (left: 1pt), height: 100%, link(url)[#display])
-      ],
-    ),
-  )
+  block(width: 100%, height: size, radius: 0.6em, align(horizon, [
+    #__fa-icon-outline(icon, size: size)
+    #box(inset: (left: 1pt), height: 100%, link(url)[#display])
+  ]))
 }
 
 
@@ -126,14 +118,15 @@
 
         #text(weight: "semibold", title)
 
-        #text(
-          size: 0.9em,
-          smallcaps([
-            #institution
-            #h(1fr)
-            #fa-icon("location-dot", size: 0.85em, fill: theme.accent-color) #location
-          ]),
-        )
+        #text(size: 0.9em, smallcaps([
+          #institution
+          #h(1fr)
+          #fa-icon(
+            "location-dot",
+            size: 0.85em,
+            fill: theme.accent-color,
+          ) #location
+        ]))
 
         #text(size: 0.9em, description)
       ],
@@ -194,11 +187,7 @@
         }
       }
 
-      __social-link(
-        icon,
-        url,
-        display,
-      )
+      __social-link(icon, url, display)
     }
   }
 }
@@ -263,7 +252,10 @@
         let last_name = author_parts.at(0, default: author)
         let first_names_str = author_parts.at(1, default: "")
 
-        let initials_content = first_names_str.split(" ").filter(p => p.len() > 0).map(p => [#p.at(0).])
+        let initials_content = first_names_str
+          .split(" ")
+          .filter(p => p.len() > 0)
+          .map(p => [#p.at(0).])
 
         let joined_initials = if initials_content.len() > 0 {
           initials_content.join(" ")
@@ -318,7 +310,9 @@
   }
 
   if "serial-number" in pub and "doi" in pub.serial-number {
-    [ doi: #link("https://doi.org/" + pub.serial-number.doi)[#text(style: "italic", str(pub.serial-number.doi))] ]
+    [
+      doi: #link("https://doi.org/" + pub.serial-number.doi)[#text(style: "italic", str(pub.serial-number.doi))]
+    ]
   }
 }
 
@@ -357,7 +351,11 @@
       ],
       [
         #for publication in publications-by-year.at(year) {
-          block(__format-publication-entry(publication, highlight-authors, max-authors))
+          block(__format-publication-entry(
+            publication,
+            highlight-authors,
+            max-authors,
+          ))
         }
       ],
     )
@@ -403,7 +401,9 @@
   show: body => context {
     set document(
       title: "Curriculum Vitae",
-      author: author.at("firstname", default: "") + " " + author.at("lastname", default: ""),
+      author: author.at("firstname", default: "")
+        + " "
+        + author.at("lastname", default: ""),
     )
 
     body
@@ -437,17 +437,18 @@
     ],
   )
 
-  set par(
-    spacing: 0.75em,
-    justify: true,
-  )
+  set par(spacing: 0.75em, justify: true)
 
   let head = {
     context {
       block(
         width: 100%,
         fill: luma(50),
-        outset: (left: page.margin.left, right: page.margin.right, top: page.margin.top),
+        outset: (
+          left: page.margin.left,
+          right: page.margin.right,
+          top: page.margin.top,
+        ),
         inset: (bottom: page.margin.top),
       )[
         #align(center)[
@@ -460,12 +461,16 @@
           #set text(fill: white, font: heading-font)
 
           #text(size: 3em)[
-            #text(weight: "light")[#author.firstname] #text(weight: "medium")[#author.lastname]
+            #text(weight: "light")[#author.firstname] #text(
+              weight: "medium",
+            )[#author.lastname]
           ]
 
           #v(-0.5em)
 
-          #text(size: 0.95em, fill: luma(200), weight: "regular")[#smallcaps(position)]
+          #text(size: 0.95em, fill: luma(200), weight: "regular")[#smallcaps(
+              position,
+            )]
         ]
       ]
     }
@@ -480,7 +485,8 @@
       #grid(
         columns: (0pt, 1fr),
         align: horizon,
-        box(fill: accent-color, width: -4pt, height: 12pt, outset: (left: 6pt)), it.body,
+        box(fill: accent-color, width: -4pt, height: 12pt, outset: (left: 6pt)),
+        it.body,
       )
     ]
 
@@ -501,7 +507,11 @@
     show heading.where(level: 1): it => block(width: 100%)[
       #set block(above: 1em)
 
-      #text(fill: accent-color, weight: "regular", font: heading-font)[#smallcaps(it.body)]
+      #text(
+        fill: accent-color,
+        weight: "regular",
+        font: heading-font,
+      )[#smallcaps(it.body)]
       #box(width: 1fr, line(length: 100%, stroke: accent-color))
     ]
 
