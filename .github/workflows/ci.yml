@@ -32,6 +32,8 @@ jobs:
           fontist install 'Noto Sans'
           fontist install 'Fira Sans'
           fontist install 'Roboto'
+          mkdir -p ~/.local/share/fonts
+          mv ~/.fontist/fonts/* ~/.local/share/fonts
 
       - name: Install Font Awesome
         run: |
