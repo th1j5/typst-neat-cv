@@ -3,15 +3,19 @@ on:
     branches:
       - main
     paths:
-      - "template/cv.typ"
       - "lib.typ"
-      - ".github/workflows/cv.yml"
+      - "template/*"
+      - ".github/workflows/ci.yml"
   pull_request:
   workflow_dispatch:
 
 jobs:
   format-and-build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,17 +33,15 @@ jobs:
 
       - name: Install fonts
         run: |
-          fontist install 'Noto Sans'
-          fontist install 'Fira Sans'
-          fontist install 'Roboto'
-          mkdir -p ~/.local/share/fonts
-          mv ~/.fontist/fonts/* ~/.local/share/fonts
+          fontist manifest-install manifest.yml
+          fontist fontconfig update
 
-      - name: Setup Font Awesome
+      - name: Install Font Awesome
         run: |
           export FA_VERSION=6.7.2
           wget https://github.com/FortAwesome/Font-Awesome/releases/download/${FA_VERSION}/fontawesome-free-${FA_VERSION}-desktop.zip
           unzip fontawesome-free-${FA_VERSION}-desktop.zip
+          mkdir -p ~/.local/share/fonts
           mv fontawesome-free-${FA_VERSION}-desktop/otfs/*.otf ~/.local/share/fonts
 
       - name: Setup Just
@@ -50,9 +52,9 @@ jobs:
 
       - name: Use local package
         run: |
-          sed -i 's|#import "@preview/neat-cv:[0-9.]\+"|#import "../lib.typ"|' template/cv.typ | head
+          sed -i 's|#import "@preview/neat-cv:[0-9.]\+"|#import "../lib.typ"|' template/cv.typ
 
-      - name: Compile CV
+      - name: Compile
         run: just
 
       - name: Upload CV artifact
