@@ -440,7 +440,7 @@
           ],
         )
       ]
-    } else [#footer],
+    } else { footer },
   )
 
   set par(spacing: 0.75em, justify: true)
