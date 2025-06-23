@@ -5,12 +5,14 @@ on:
       - "lib.typ"
       - "template/*"
       - ".github/workflows/ci.yml"
+      - ".pre-commit-config.yaml"
   pull_request:
   workflow_dispatch:
 
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
