@@ -29,6 +29,7 @@
   // body-font: ("Noto Sans", "Roboto"),
   // paper-size: "us-letter",
   // side-width: 4cm,
+  // gdpr: false,
 )
 
 #side[

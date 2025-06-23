@@ -378,6 +378,7 @@
 /// - body-font (array): Font(s) for body text
 /// - paper-size (string): Paper size
 /// - side-width (length): Sidebar width
+/// - gdpr (boolean): Add GDPR data usage in the footer
 /// - footer (content): Optional custom footer
 /// - body (content): Main content of the CV
 #let cv(
@@ -390,6 +391,7 @@
   body-font: ("Noto Sans", "Roboto"),
   paper-size: "us-letter",
   side-width: 4cm,
+  gdpr: false,
   footer: auto,
   body,
 ) = {
@@ -426,6 +428,7 @@
         #grid(
           columns: (side-width, 1fr),
           align: center,
+          gutter: 2mm,
           inset: (col, _) => {
             if col == 0 {
               (right: 4mm)
@@ -439,6 +442,12 @@
           [
             #author.firstname #author.lastname CV #box(inset: (x: 3pt), sym.dot.c) #text(date)
           ],
+          [],
+          if gdpr {
+            [
+              I authorise the processing of personal data contained within my CV, according to GDPR (EU) 2016/679, Article 6.1(a).
+            ]
+          }
         )
       ]
     } else { footer },
