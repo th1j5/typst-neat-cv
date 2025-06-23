@@ -389,6 +389,7 @@
   body-font: ("Noto Sans", "Roboto"),
   paper-size: "us-letter",
   side-width: 4cm,
+  footer: auto,
   body,
 ) = {
   context {
@@ -417,27 +418,29 @@
   set page(
     paper: paper-size,
     margin: (left: 12mm, right: 12mm, top: 10mm, bottom: 12mm),
-    footer: [
-      #set text(size: 0.7em, fill: font-color.lighten(50%))
+    footer: if footer == auto {
+      [
+        #set text(size: 0.7em, fill: font-color.lighten(50%))
 
-      #grid(
-        columns: (side-width, 1fr),
-        align: center,
-        inset: (col, _) => {
-          if col == 0 {
-            (right: 4mm)
-          } else {
-            (left: 4mm)
-          }
-        },
-        [
-          #context counter(page).display("1 / 1", both: true)
-        ],
-        [
-          #author.firstname #author.lastname CV #box(inset: (x: 3pt), sym.dot.c) #text(date)
-        ],
-      )
-    ],
+        #grid(
+          columns: (side-width, 1fr),
+          align: center,
+          inset: (col, _) => {
+            if col == 0 {
+              (right: 4mm)
+            } else {
+              (left: 4mm)
+            }
+          },
+          [
+            #context counter(page).display("1 / 1", both: true)
+          ],
+          [
+            #author.firstname #author.lastname CV #box(inset: (x: 3pt), sym.dot.c) #text(date)
+          ],
+        )
+      ]
+    } else [#footer],
   )
 
   set par(spacing: 0.75em, justify: true)
