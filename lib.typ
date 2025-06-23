@@ -59,11 +59,14 @@
       accent-color
     }
     let col-width = (width - 2pt * (max-level - 1)) / max-level
-    let levels = (box(height: 3.5pt, width: 100%, fill: _accent-color),) * level
-
+    let levels = range(max-level).map(l => box(
+      height: 3.5pt,
+      width: 100%,
+      fill: if (l <= level) { _accent-color },
+      stroke: _accent-color + 0.75pt,
+    ))
     grid(
       columns: (col-width,) * max-level,
-      stroke: _accent-color + 0.75pt,
       gutter: 2pt,
       ..levels
     )
