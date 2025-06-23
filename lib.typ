@@ -62,7 +62,7 @@
     let levels = range(max-level).map(l => box(
       height: 3.5pt,
       width: 100%,
-      fill: if (l <= level) { _accent-color },
+      fill: if (l < level) { _accent-color },
       stroke: _accent-color + 0.75pt,
     ))
     grid(
