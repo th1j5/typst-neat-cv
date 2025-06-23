@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v5.0.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
@@ -9,10 +9,10 @@ repos:
     hooks:
       - id: typstyle
         name: typstyle
-        description: Format files with typstyle
+        description: Check files with typstyle
         entry: typstyle
         language: rust
         types: [file]
-        additional_dependencies: ["cli:typstyle:0.13.9"]
+        additional_dependencies: ["cli:typstyle:0.13.11"]
         files: \.typ$
-        args: [-i]
+        args: [--check]

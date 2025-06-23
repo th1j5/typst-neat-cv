@@ -12,4 +12,4 @@ compile-png-page page:
 	oxipng assets/cv_p{{ page }}.png
 
 format:
-	typstyle -i template/cv.typ
+	typstyle -i lib.typ template/cv.typ
