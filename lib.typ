@@ -59,11 +59,14 @@
       accent-color
     }
     let col-width = (width - 2pt * (max-level - 1)) / max-level
-    let levels = (box(height: 3.5pt, width: 100%, fill: _accent-color),) * level
-
+    let levels = range(max-level).map(l => box(
+      height: 3.5pt,
+      width: 100%,
+      fill: if (l < level) { _accent-color },
+      stroke: _accent-color + 0.75pt,
+    ))
     grid(
       columns: (col-width,) * max-level,
-      stroke: _accent-color + 0.75pt,
       gutter: 2pt,
       ..levels
     )
@@ -376,6 +379,7 @@
 /// - paper-size (string): Paper size
 /// - side-width (length): Sidebar width
 /// - gdpr (boolean): Add GDPR data usage in the footer
+/// - footer (content): Optional custom footer
 /// - body (content): Main content of the CV
 #let cv(
   author: (:),
@@ -388,6 +392,7 @@
   paper-size: "us-letter",
   side-width: 4cm,
   gdpr: false,
+  footer: auto,
   body,
 ) = {
   context {
@@ -416,34 +421,36 @@
   set page(
     paper: paper-size,
     margin: (left: 12mm, right: 12mm, top: 10mm, bottom: 12mm),
-    footer: [
-      #set text(size: 0.7em, fill: font-color.lighten(50%))
+    footer: if footer == auto {
+      [
+        #set text(size: 0.7em, fill: font-color.lighten(50%))
 
-      #grid(
-        columns: (side-width, 1fr),
-        align: center,
-        gutter: 2mm,
-        inset: (col, _) => {
-          if col == 0 {
-            (right: 4mm)
-          } else {
-            (left: 4mm)
-          }
-        },
-        [
-          #context counter(page).display("1 / 1", both: true)
-        ],
-        [
-          #author.firstname #author.lastname CV #box(inset: (x: 3pt), sym.dot.c) #text(date)
-        ],
-        [],
-        if gdpr {
+        #grid(
+          columns: (side-width, 1fr),
+          align: center,
+          gutter: 2mm,
+          inset: (col, _) => {
+            if col == 0 {
+              (right: 4mm)
+            } else {
+              (left: 4mm)
+            }
+          },
           [
-            I authorise the processing of personal data contained within my CV, according to GDPR (EU) 2016/679, Article 6.1(a).
-          ]
-        }
-      )
-    ],
+            #context counter(page).display("1 / 1", both: true)
+          ],
+          [
+            #author.firstname #author.lastname CV #box(inset: (x: 3pt), sym.dot.c) #text(date)
+          ],
+          [],
+          if gdpr {
+            [
+              I authorise the processing of personal data contained within my CV, according to GDPR (EU) 2016/679, Article 6.1(a).
+            ]
+          }
+        )
+      ]
+    } else { footer },
   )
 
   set par(spacing: 0.75em, justify: true)
