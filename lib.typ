@@ -378,6 +378,7 @@
 /// - body-font (array): Font(s) for body text
 /// - paper-size (string): Paper size
 /// - side-width (length): Sidebar width
+/// - footer (content): Optional custom footer
 /// - body (content): Main content of the CV
 #let cv(
   author: (:),
