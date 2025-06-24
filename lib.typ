@@ -393,6 +393,7 @@
 /// - profile-picture (image): Profile picture
 /// - accent-color (color): Accent color for highlights
 /// - font-color (color): Main text color
+/// - header-color (color): Color for header background
 /// - date (string): Date string for footer
 /// - heading-font (string): Font for headings
 /// - body-font (array): Font(s) for body text
@@ -406,6 +407,7 @@
   profile-picture: none,
   accent-color: rgb("#408abb"),
   font-color: rgb("#333333"),
+  header-color: luma(50),
   date: datetime.today().display("[month repr:long] [year]"),
   heading-font: "Fira Sans",
   body-font: ("Noto Sans", "Roboto"),
@@ -419,6 +421,7 @@
     __st-theme.update((
       font-color: font-color,
       accent-color: accent-color,
+      header-color: header-color,
       fonts: (heading: heading-font, body: body-font),
     ))
 
@@ -490,7 +493,7 @@
     context {
       block(
         width: 100%,
-        fill: luma(50),
+        fill: header-color,
         outset: (
           left: page.margin.left,
           right: page.margin.right,
