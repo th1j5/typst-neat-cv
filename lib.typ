@@ -442,12 +442,13 @@
           [
             #author.firstname #author.lastname CV #box(inset: (x: 3pt), sym.dot.c) #text(date)
           ],
+
           [],
           if gdpr {
             [
               I authorise the processing of personal data contained within my CV, according to GDPR (EU) 2016/679, Article 6.1(a).
             ]
-          }
+          },
         )
       ]
     } else { footer },

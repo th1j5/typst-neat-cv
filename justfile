@@ -7,7 +7,7 @@ compile-pdf:
     	just _compile_pdf template/cv.typ; \
     elif [ "{{ target }}" = "local" ]; then \
     	just _compile-with-local-lib pdf; \
-    fi	
+    fi
 
 compile-png:
     @just target={{ target }} compile-png-page 1
