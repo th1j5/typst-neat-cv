@@ -15,4 +15,4 @@ repos:
         types: [file]
         additional_dependencies: ["cli:typstyle:0.13.11"]
         files: \.typ$
-        args: [--check]
+        args: [--inplace]
