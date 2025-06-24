@@ -14,24 +14,34 @@ A modern and elegant CV template for Typst, inspired by [Awesome CV](https://git
 
 ### Software
 
-- [typst](https://typst.app/) (tested with v0.13.1)
+- [typst](https://typst.app/) (tested with v0.13.0+)
 
 ### Fonts
 
-By default, this template uses the Fira Sans and Noto Sans fonts. You will need to install these fonts on your system to use the template as intended.
-One option is to download them from Google Fonts:
+#### Text Fonts
 
-- [Fira Sans](https://fonts.google.com/specimen/Fira+Sans)
-- [Noto Sans](https://fonts.google.com/specimen/Noto+Sans)
+By default, this template uses the Fira Sans and Noto Sans fonts. If you use the template through the webapp (https://typst.app), you don't need to do anything. If you want to use it locally instead, you will need to install these fonts on your system to use the template with its defaults. You have a few options for this:
+- Use [fontist](https://github.com/fontist/fontist) to install the fonts automatically:
+  ```bash
+  fontist manifest-install manifest.yml
+  fontist fontconfig update
+  ```
+- Download the fonts manually and install them in your system's font directory:
+  - [Fira Sans](https://fonts.google.com/specimen/Fira+Sans)
+  - [Noto Sans](https://fonts.google.com/specimen/Noto+Sans)
+- (Linux) Install them via your package manager, as most distributions provide these fonts in their repositories.
 
-On Linux, check your package manager, as most distributions provide these fonts in their repositories.
+#### Icon Fonts
 
-Additionally, this template uses the FontAwesome icons via the [fontawesome](https://typst.app/universe/package/fontawesome) package.
-Refer to the package documentation for instructions on installing the fonts on your system.
+This template uses FontAwesome icons via the [fontawesome](https://typst.app/universe/package/fontawesome) package.
+To install the icons, you need to download the "FontAwesome Free For Desktop" package from the [FontAwesome website](https://fontawesome.com/download) and install the `.otf` files in your system's font directory.
+
+> [!NOTE]
+> If you are using the webapp (https://typst.app/), upload the entire `otf/` directory to your project and the fonts will be recognized automatically (possibly after a reload).
 
 ## Usage
 
-Basic usage example:
+Here is a basic usage example:
 
 ```typst
 #import "@preview/neat-cv:0.1.0": cv, side, entry, item-with-level, contact-info, social-links
@@ -49,7 +59,7 @@ Basic usage example:
 
 #side[
   = About Me
-  Just a guy learning Typst.
+  Just someone learning Typst.
 
   = Contact
   #contact-info()
@@ -80,7 +90,7 @@ Basic usage example:
   location: "Somewhere, World",
   date: "2023 - Present",
   [
-    - Worked on some cool stuff.
+    - Worked on some interesting projects.
   ],
 )
 ```
