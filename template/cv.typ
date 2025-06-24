@@ -1,4 +1,4 @@
-#import "@preview/neat-cv:0.1.0": (
+#import "@preview/neat-cv:0.2.0": (
   contact-info, cv, entry, item-pills, item-with-level, publications, side,
   social-links,
 )
@@ -24,11 +24,14 @@
   profile-picture: image("profile.png"),
   accent-color: rgb("#4682b4"),
   // font-color: rgb("#333333"),
+  header-color: rgb("#3b4f60"),
   // date: datetime.today().display("[month repr:long] [year]"),
   // heading-font: "Fira Sans",
   // body-font: ("Noto Sans", "Roboto"),
   // paper-size: "us-letter",
   // side-width: 4cm,
+  // gdpr: false,
+  // footer: auto,
 )
 
 #side[
@@ -109,7 +112,7 @@
 
 #entry(
   title: "Independent Inventor & Research Scientist",
-  date: "1955 - now",
+  date: "1955 – now",
   institution: "Hill Valley Laboratory",
   location: "Hill Valley, CA, USA",
 )[
@@ -122,7 +125,7 @@
 
 #entry(
   title: "Science Educator & Public Speaker",
-  date: "1960 - now",
+  date: "1960 – now",
   institution: "Various Institutions",
   location: "USA & Europe",
 )[
@@ -144,7 +147,7 @@
 
 #entry(
   title: "Adjunct Lecturer: Quantum Theory and Paradoxes",
-  date: "1978 - 1984",
+  date: "1978 – 1984",
   institution: "California Institute of Technology",
   location: "Pasadena, CA, USA",
 )[
@@ -154,7 +157,7 @@
 
 #entry(
   title: "Research Fellow: High-Energy Particle Physics",
-  date: "1952 - 1955",
+  date: "1952 – 1955",
   institution: "MIT",
   location: "Cambridge, MA, USA",
 )[
