@@ -30,6 +30,7 @@
   // paper-size: "us-letter",
   // side-width: 4cm,
   // gdpr: false,
+  // footer: auto,
 )
 
 #side[
@@ -110,7 +111,7 @@
 
 #entry(
   title: "Independent Inventor & Research Scientist",
-  date: "1955 - now",
+  date: "1955 – now",
   institution: "Hill Valley Laboratory",
   location: "Hill Valley, CA, USA",
 )[
@@ -123,7 +124,7 @@
 
 #entry(
   title: "Science Educator & Public Speaker",
-  date: "1960 - now",
+  date: "1960 – now",
   institution: "Various Institutions",
   location: "USA & Europe",
 )[
@@ -145,7 +146,7 @@
 
 #entry(
   title: "Adjunct Lecturer: Quantum Theory and Paradoxes",
-  date: "1978 - 1984",
+  date: "1978 – 1984",
   institution: "California Institute of Technology",
   location: "Pasadena, CA, USA",
 )[
@@ -155,7 +156,7 @@
 
 #entry(
   title: "Research Fellow: High-Energy Particle Physics",
-  date: "1952 - 1955",
+  date: "1952 – 1955",
   institution: "MIT",
   location: "Cambridge, MA, USA",
 )[

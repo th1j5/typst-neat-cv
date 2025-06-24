@@ -10,33 +10,37 @@
 /// Draws a circular FontAwesome icon.
 /// - icon (string): FontAwesome icon name
 /// - size (length): Icon size
-#let __fa-icon-outline(icon, size: 1.5em) = context {
-  let theme = __st-theme.final()
+#let __fa-icon-outline(icon, size: 1.5em) = (
+  context {
+    let theme = __st-theme.final()
 
-  box(
-    fill: theme.accent-color.lighten(10%),
-    width: size,
-    height: size,
-    radius: size / 2,
-    align(center + horizon, fa-icon(icon, fill: white, size: size - .5em)),
-  )
-}
+    box(
+      fill: theme.accent-color.lighten(10%),
+      width: size,
+      height: size,
+      radius: size / 2,
+      align(center + horizon, fa-icon(icon, fill: white, size: size - .5em)),
+    )
+  }
+)
 
 /// Displays a social link with icon and text.
 /// - icon (string): FontAwesome icon name
 /// - url (string): Link URL
 /// - display (string): Display text
 /// - size (length): Icon size
-#let __social-link(icon, url, display, size: 1.5em) = context {
-  let theme = __st-theme.final()
+#let __social-link(icon, url, display, size: 1.5em) = (
+  context {
+    let theme = __st-theme.final()
 
-  set text(size: 0.95em)
+    set text(size: 0.95em)
 
-  block(width: 100%, height: size, radius: 0.6em, align(horizon, [
-    #__fa-icon-outline(icon, size: size)
-    #box(inset: (left: 1pt), height: 100%, link(url)[#display])
-  ]))
-}
+    block(width: 100%, height: size, radius: 0.6em, align(horizon, [
+      #__fa-icon-outline(icon, size: size)
+      #box(inset: (left: 1pt), height: 100%, link(url)[#display])
+    ]))
+  }
+)
 
 
 // ---- Visual Elements ----
@@ -62,7 +66,9 @@
     let levels = range(max-level).map(l => box(
       height: 3.5pt,
       width: 100%,
-      fill: if (l < level) { _accent-color },
+      fill: if (l < level) {
+        _accent-color
+      },
       stroke: _accent-color + 0.75pt,
     ))
     grid(
@@ -75,20 +81,22 @@
 
 /// Displays a list of items as "pills" (tags).
 /// - items (array): List of items to display as pills
-#let item-pills(items) = context {
-  let theme = __st-theme.final()
+#let item-pills(items) = (
+  context {
+    let theme = __st-theme.final()
 
-  set text(size: 0.9em)
-  set par(spacing: 0.5em)
+    set text(size: 0.85em)
+    set par(spacing: 0.5em)
 
-  items
-    .map(item => box(
-      inset: (x: 3pt, y: 3pt),
-      stroke: theme.accent-color + 0.5pt,
-      item,
-    ))
-    .join([ ])
-}
+    items
+      .map(item => box(
+        inset: (x: 3pt, y: 3pt),
+        stroke: theme.accent-color + 0.5pt,
+        item,
+      ))
+      .join([ ])
+  }
+)
 
 
 // ---- Entry Blocks ----
@@ -141,102 +149,112 @@
 /// - title (string): Item name
 /// - level (int): Level value
 /// - subtitle (string): Optional subtitle
-#let item-with-level(title, level, subtitle: "") = context {
-  let theme = __st-theme.final()
+#let item-with-level(title, level, subtitle: "") = (
+  context {
+    let theme = __st-theme.final()
 
-  block()[
-    #text(title)
-    #h(1fr)
-    #text(fill: theme.font-color.lighten(40%), subtitle)
-    #level-bar(level, width: 100%)
-  ]
-}
+    block()[
+      #text(title)
+      #h(1fr)
+      #text(fill: theme.font-color.lighten(40%), subtitle)
+      #level-bar(level, width: 100%)
+    ]
+  }
+)
 
 
 // ---- Social & Contact Info ----
 
 /// Displays all available social links for the author.
-#let social-links() = context {
-  let author = __st-author.final()
-  let social_defs = (
-    ("website", "globe", ""),
-    ("twitter", "twitter", "https://twitter.com/"),
-    ("mastodon", "mastodon", "https://mastodon.social/"),
-    ("github", "github", "https://github.com/"),
-    ("gitlab", "gitlab", "https://gitlab.com/"),
-    ("linkedin", "linkedin", "https://www.linkedin.com/in/"),
-    ("researchgate", "researchgate", "https://www.researchgate.net/profile/"),
-    ("scholar", "google-scholar", "https://scholar.google.com/citations?user="),
-    ("orcid", "orcid", "https://orcid.org/"),
-  )
+#let social-links() = (
+  context {
+    let author = __st-author.final()
+    let social_defs = (
+      ("website", "globe", ""),
+      ("twitter", "twitter", "https://twitter.com/"),
+      ("mastodon", "mastodon", "https://mastodon.social/"),
+      ("github", "github", "https://github.com/"),
+      ("gitlab", "gitlab", "https://gitlab.com/"),
+      ("linkedin", "linkedin", "https://www.linkedin.com/in/"),
+      ("researchgate", "researchgate", "https://www.researchgate.net/profile/"),
+      (
+        "scholar",
+        "google-scholar",
+        "https://scholar.google.com/citations?user=",
+      ),
+      ("orcid", "orcid", "https://orcid.org/"),
+    )
 
-  set text(size: 0.95em, fill: luma(100))
+    set text(size: 0.95em, fill: luma(100))
 
-  for (key, icon, url_prefix) in social_defs {
-    if key in author {
-      let url = url_prefix + author.at(key)
-      let display = author.at(key)
+    for (key, icon, url_prefix) in social_defs {
+      if key in author {
+        let url = url_prefix + author.at(key)
+        let display = author.at(key)
 
-      if key == "website" {
-        display = display.replace(regex("https?://"), "")
-      } else if key == "mastodon" {
-        url = {
-          let parts = display.split("@")
-          if parts.len() >= 3 {
-            "https://" + parts.at(2) + "/@" + parts.at(1)
-          } else {
-            url_prefix + display
+        if key == "website" {
+          display = display.replace(regex("https?://"), "")
+        } else if key == "mastodon" {
+          url = {
+            let parts = display.split("@")
+            if parts.len() >= 3 {
+              "https://" + parts.at(2) + "/@" + parts.at(1)
+            } else {
+              url_prefix + display
+            }
           }
         }
-      }
 
-      __social-link(icon, url, display)
+        __social-link(icon, url, display)
+      }
     }
   }
-}
+)
 
 /// Displays the author's contact information (email, phone, address).
-#let contact-info() = context [
-  #let author = __st-author.final()
-  #let theme = __st-theme.final()
-  #let accent-color = theme.accent-color
-  #let contact-items = ()
+#let contact-info() = (
+  context [
+    #let author = __st-author.final()
+    #let theme = __st-theme.final()
+    #let accent-color = theme.accent-color
+    #let contact-items = ()
 
-  #if "email" in author {
-    contact-items += (
-      fa-icon("at", fill: accent-color),
-      link("mailto:" + author.email)[#text(author.email)],
-    )
-  }
+    #if "email" in author {
+      contact-items += (
+        fa-icon("at", fill: accent-color),
+        link("mailto:" + author.email)[#text(author.email)],
+      )
+    }
 
-  #if "phone" in author {
-    contact-items += (
-      fa-icon("mobile-screen", fill: accent-color),
-      link("tel:" + author.phone)[#text(author.phone)],
-    )
-  }
+    #if "phone" in author {
+      contact-items += (
+        fa-icon("mobile-screen", fill: accent-color),
+        link("tel:" + author.phone)[#text(author.phone)],
+      )
+    }
 
-  #if "address" in author {
-    contact-items += (
-      fa-icon("envelope", fill: accent-color),
-      author.address,
-    )
-  }
+    #if "address" in author {
+      contact-items += (
+        fa-icon("envelope", fill: accent-color),
+        author.address,
+      )
+    }
 
-  #if contact-items.len() > 0 {
-    table(
-      columns: (1em, 1fr),
-      align: (left, left),
-      inset: 0pt,
-      column-gutter: 0.5em,
-      row-gutter: 1em,
-      stroke: none,
-      ..contact-items
-    )
-  } else {
-    []
-  }
-]
+    #if contact-items.len() > 0 {
+      table(
+        columns: (1em, 1fr),
+        align: (left, left),
+        inset: 0pt,
+        column-gutter: 0.5em,
+        row-gutter: 1em,
+        stroke: none,
+        ..contact-items
+      )
+    } else {
+      []
+    }
+  ]
+)
 
 
 // ---- Publications ----
@@ -323,47 +341,49 @@
 /// - yaml-data (dictionary): Data loaded from YAML file
 /// - highlight-authors (array): Authors to highlight
 /// - max-authors (int): Max authors to display per entry
-#let publications(yaml-data, highlight-authors: (), max-authors: 10) = context {
-  let theme = __st-theme.final()
-  let publication-data = yaml-data.values()
-  let publications-by-year = (:)
+#let publications(yaml-data, highlight-authors: (), max-authors: 10) = (
+  context {
+    let theme = __st-theme.final()
+    let publication-data = yaml-data.values()
+    let publications-by-year = (:)
 
-  set block(above: 0.7em)
+    set block(above: 0.7em)
 
-  for pub in publication-data {
-    let year = str(pub.at("date", default: ""))
+    for pub in publication-data {
+      let year = str(pub.at("date", default: ""))
 
-    if year == "" {
-      continue
+      if year == "" {
+        continue
+      }
+
+      if year in publications-by-year {
+        publications-by-year.at(year) += (pub,)
+      } else {
+        publications-by-year.insert(year, (pub,))
+      }
     }
 
-    if year in publications-by-year {
-      publications-by-year.at(year) += (pub,)
-    } else {
-      publications-by-year.insert(year, (pub,))
+    for year in publications-by-year.keys().sorted().rev() {
+      grid(
+        columns: (2cm, auto),
+        align: (right, left),
+        column-gutter: .8em,
+        [
+          #text(size: 0.8em, fill: theme.font-color.lighten(50%), year)
+        ],
+        [
+          #for publication in publications-by-year.at(year) {
+            block(__format-publication-entry(
+              publication,
+              highlight-authors,
+              max-authors,
+            ))
+          }
+        ],
+      )
     }
   }
-
-  for year in publications-by-year.keys().sorted().rev() {
-    grid(
-      columns: (2cm, auto),
-      align: (right, left),
-      column-gutter: .8em,
-      [
-        #text(size: 0.8em, fill: theme.font-color.lighten(50%), year)
-      ],
-      [
-        #for publication in publications-by-year.at(year) {
-          block(__format-publication-entry(
-            publication,
-            highlight-authors,
-            max-authors,
-          ))
-        }
-      ],
-    )
-  }
-}
+)
 
 
 // ---- Main CV Template ----
@@ -405,16 +425,23 @@
     __st-author.update(author)
   }
 
-  show: body => context {
-    set document(
-      title: "Curriculum Vitae",
-      author: author.at("firstname", default: "")
-        + " "
-        + author.at("lastname", default: ""),
-    )
+  show: body => (
+    context {
+      set document(
+        title: "Curriculum Vitae",
+        author: (
+          author.at("firstname", default: "")
+            + " "
+            + author.at(
+              "lastname",
+              default: "",
+            )
+        ),
+      )
 
-    body
-  }
+      body
+    }
+  )
 
   set text(font: body-font, size: 10pt, weight: "light", fill: font-color)
 
@@ -446,12 +473,15 @@
           [],
           if gdpr {
             [
-              I authorise the processing of personal data contained within my CV, according to GDPR (EU) 2016/679, Article 6.1(a).
+              I authorise the processing of personal data contained within my CV,
+              according to GDPR (EU) 2016/679, Article 6.1(a).
             ]
           },
         )
       ]
-    } else { footer },
+    } else {
+      footer
+    },
   )
 
   set par(spacing: 0.75em, justify: true)
@@ -485,9 +515,11 @@
 
           #v(-0.5em)
 
-          #text(size: 0.95em, fill: luma(200), weight: "regular")[#smallcaps(
-              position,
-            )]
+          #text(
+            size: 0.95em,
+            fill: luma(200),
+            weight: "regular",
+          )[#smallcaps(position)]
         ]
       ]
     }
@@ -511,7 +543,7 @@
       block(
         clip: true,
         stroke: accent-color + 1pt,
-        radius: 2cm,
+        radius: side-width / 2,
         width: 100%,
         profile-picture,
       )
@@ -539,14 +571,16 @@
 
   head
 
+  v(2mm)
+
   grid(
-    columns: (side-width, auto),
+    columns: (side-width + 6mm, auto),
     align: (left, left),
     inset: (col, _) => {
       if col == 0 {
-        (right: 4mm, y: 1mm)
+        (right: 6mm, y: 1mm)
       } else {
-        (left: 4mm, y: 1mm)
+        (left: 6mm, y: 1mm)
       }
     },
     side-content,
