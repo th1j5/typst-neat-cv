@@ -459,14 +459,8 @@
         #grid(
           columns: (side-width, 1fr),
           align: center,
-          gutter: 2mm,
-          inset: (col, _) => {
-            if col == 0 {
-              (right: 4mm)
-            } else {
-              (left: 4mm)
-            }
-          },
+          gutter: 12mm,
+          inset: 0pt,
           [
             #context counter(page).display("1 / 1", both: true)
           ],
