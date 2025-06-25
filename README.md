@@ -1,4 +1,6 @@
 # Neat CV
+![Release](https://img.shields.io/github/v/release/dialvarezs/neat-cv)
+[![Tests](https://github.com/dialvarezs/neat-cv/actions/workflows/ci.yml/badge.svg)](https://github.com/dialvarezs/neat-cv/actions/workflows/ci.yml)
 
 A modern and elegant CV template for Typst, inspired by [Awesome CV](https://github.com/posquit0/Awesome-CV) and [simple-hipstercv](https://github.com/latex-ninja/simple-hipstercv).
 
@@ -48,7 +50,7 @@ To install the icons, you need to download the "FontAwesome Free For Desktop" pa
 Here is a basic usage example:
 
 ```typst
-#import "@preview/neat-cv:0.2.0": cv, side, entry, item-with-level, contact-info, social-links
+#import "@preview/neat-cv:0.2.1": cv, side, entry, item-with-level, contact-info, social-links
 
 #show: cv.with(
   author: (

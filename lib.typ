@@ -81,20 +81,21 @@
 
 /// Displays a list of items as "pills" (tags).
 /// - items (array): List of items to display as pills
-#let item-pills(items) = (
+/// - justify (boolean): Whether to justify the pills (default: true)
+#let item-pills(items, justify: true) = (
   context {
     let theme = __st-theme.final()
 
-    set text(size: 0.85em)
-    set par(spacing: 0.5em)
+    set text(size: 0.85em, spacing: 0.5em)
+    set par(justify: justify)
 
-    items
+    block(items
       .map(item => box(
         inset: (x: 3pt, y: 3pt),
         stroke: theme.accent-color + 0.5pt,
         item,
       ))
-      .join([ ])
+      .join(" "))
   }
 )
 
@@ -264,8 +265,6 @@
 /// - highlight-authors (array): Authors to highlight
 /// - max-authors (int): Max authors to display before "et al."
 #let __format-publication-entry(pub, highlight-authors, max-authors) = {
-  set text(size: 0.7em)
-
   for (i, author) in pub.author.enumerate() {
     if i < max-authors {
       let author-display = {
@@ -347,7 +346,7 @@
     let publication-data = yaml-data.values()
     let publications-by-year = (:)
 
-    set block(above: 0.7em)
+    set block(above: 0.7em, width: 100%)
 
     for pub in publication-data {
       let year = str(pub.at("date", default: ""))
@@ -373,11 +372,14 @@
         ],
         [
           #for publication in publications-by-year.at(year) {
-            block(__format-publication-entry(
-              publication,
-              highlight-authors,
-              max-authors,
-            ))
+            block([
+              #set text(size: 0.68em)
+              #__format-publication-entry(
+                publication,
+                highlight-authors,
+                max-authors,
+              )
+            ])
           }
         ],
       )
@@ -458,14 +460,8 @@
         #grid(
           columns: (side-width, 1fr),
           align: center,
-          gutter: 2mm,
-          inset: (col, _) => {
-            if col == 0 {
-              (right: 4mm)
-            } else {
-              (left: 4mm)
-            }
-          },
+          gutter: 12mm,
+          inset: 0pt,
           [
             #context counter(page).display("1 / 1", both: true)
           ],
