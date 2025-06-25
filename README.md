@@ -1,4 +1,6 @@
 # Neat CV
+![Release](https://img.shields.io/github/v/release/dialvarezs/neat-cv)
+[![Tests](https://github.com/dialvarezs/neat-cv/actions/workflows/ci.yml/badge.svg)](https://github.com/dialvarezs/neat-cv/actions/workflows/ci.yml)
 
 A modern and elegant CV template for Typst, inspired by [Awesome CV](https://github.com/posquit0/Awesome-CV) and [simple-hipstercv](https://github.com/latex-ninja/simple-hipstercv).
 
