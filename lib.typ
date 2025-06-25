@@ -81,20 +81,21 @@
 
 /// Displays a list of items as "pills" (tags).
 /// - items (array): List of items to display as pills
-#let item-pills(items) = (
+/// - justify (boolean): Whether to justify the pills (default: true)
+#let item-pills(items, justify: true) = (
   context {
     let theme = __st-theme.final()
 
-    set text(size: 0.85em)
-    set par(spacing: 0.5em)
+    set text(size: 0.85em, spacing: 0.5em)
+    set par(justify: justify)
 
-    items
+    block(items
       .map(item => box(
         inset: (x: 3pt, y: 3pt),
         stroke: theme.accent-color + 0.5pt,
         item,
       ))
-      .join([ ])
+      .join(" "))
   }
 )
 
