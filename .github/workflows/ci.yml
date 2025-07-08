@@ -20,7 +20,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: "3.13"
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
@@ -32,21 +32,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Fontist
-        uses: fontist/setup-fontist@v2
-
-      - name: Install fonts
-        run: |
-          fontist manifest-install manifest.yml
-          fontist fontconfig update
-
-      - name: Install Font Awesome
-        run: |
-          export FA_VERSION=6.7.2
-          wget https://github.com/FortAwesome/Font-Awesome/releases/download/${FA_VERSION}/fontawesome-free-${FA_VERSION}-desktop.zip
-          unzip fontawesome-free-${FA_VERSION}-desktop.zip
-          mkdir -p ~/.local/share/fonts
-          mv fontawesome-free-${FA_VERSION}-desktop/otfs/*.otf ~/.local/share/fonts
+      - name: Setup fonts
+        uses: ./.github/actions/setup-fonts
+        with:
+          manifest-path: manifest.yml
+          font-awesome-version: "6.7.2"
 
       - name: Setup Just
         uses: extractions/setup-just@v3
