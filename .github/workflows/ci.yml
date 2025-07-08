@@ -44,10 +44,6 @@ jobs:
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
 
-      - name: Use local package
-        run: |
-          sed -i 's|#import "@preview/neat-cv:[0-9.]\+"|#import "../lib.typ"|' template/cv.typ
-
       - name: Compile
         run: just
 
