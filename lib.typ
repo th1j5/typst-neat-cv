@@ -89,13 +89,15 @@
     set text(size: 0.85em, spacing: 0.5em)
     set par(justify: justify)
 
-    block(items
-      .map(item => box(
-        inset: (x: 3pt, y: 3pt),
-        stroke: theme.accent-color + 0.5pt,
-        item,
-      ))
-      .join(" "))
+    block(
+      items
+        .map(item => box(
+          inset: (x: 3pt, y: 3pt),
+          stroke: theme.accent-color + 0.5pt,
+          item,
+        ))
+        .join(" "),
+    )
   }
 )
 
