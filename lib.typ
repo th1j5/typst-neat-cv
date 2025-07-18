@@ -503,6 +503,9 @@
   /// Font(s) for body text
   /// -> array
   body-font: ("Noto Sans", "Roboto"),
+  /// Font size for body text
+  /// -> length
+  body-font-size: 10pt,
   /// Paper size
   /// -> string
   paper-size: "us-letter",
@@ -548,7 +551,7 @@
     }
   )
 
-  set text(font: body-font, size: 10pt, weight: "light", fill: font-color)
+  set text(font: body-font, size: body-font-size, weight: "light", fill: font-color)
 
   set page(
     paper: paper-size,
