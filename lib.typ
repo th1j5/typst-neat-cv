@@ -101,6 +101,15 @@
   }
 )
 
+/// Displays an email link.
+/// - email (string): Email address
+#let email-link(email) = context {
+  link("mailto:" + email)[#text(
+      email,
+      fill: __st-theme.final().accent-color,
+    )]
+}
+
 
 // ---- Entry Blocks ----
 
