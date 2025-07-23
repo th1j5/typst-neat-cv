@@ -8,9 +8,16 @@
 // ---- Icon & Visual Helpers ----
 
 /// Draws a circular FontAwesome icon.
-/// - icon (string): FontAwesome icon name
-/// - size (length): Icon size
-#let __fa-icon-outline(icon, size: 1.5em) = (
+///
+/// -> content
+#let __fa-icon-outline(
+  /// FontAwesome icon name
+  /// -> string
+  icon,
+  /// Icon size
+  /// -> length
+  size: 1.5em,
+) = (
   context {
     let theme = __st-theme.final()
 
@@ -25,11 +32,22 @@
 )
 
 /// Displays a social link with icon and text.
-/// - icon (string): FontAwesome icon name
-/// - url (string): Link URL
-/// - display (string): Display text
-/// - size (length): Icon size
-#let __social-link(icon, url, display, size: 1.5em) = (
+///
+/// -> content
+#let __social-link(
+  /// FontAwesome icon name
+  /// -> string
+  icon,
+  /// Link URL
+  /// -> string
+  url,
+  /// Display text
+  /// -> string
+  display,
+  /// Icon size
+  /// -> length
+  size: 1.5em,
+) = (
   context {
     let theme = __st-theme.final()
 
@@ -46,14 +64,20 @@
 // ---- Visual Elements ----
 
 /// Draws a horizontal level bar (for skills/languages).
-/// - level (int): Filled level
-/// - max-level (int): Maximum level (default: 5)
-/// - width (length): Total width
-/// - accent-color (color): Bar color (optional)
+///
+/// -> content
 #let level-bar(
+  /// Filled level
+  /// -> int
   level,
+  /// Maximum level (default: 5)
+  /// -> int
   max-level: 5,
+  /// Total width
+  /// -> length
   width: 3.5cm,
+  /// Bar color (optional)
+  /// -> color | none
   accent-color: none,
 ) = {
   context {
@@ -80,9 +104,16 @@
 }
 
 /// Displays a list of items as "pills" (tags).
-/// - items (array): List of items to display as pills
-/// - justify (boolean): Whether to justify the pills (default: true)
-#let item-pills(items, justify: true) = (
+///
+/// -> content
+#let item-pills(
+  /// List of items to display as pills
+  /// -> array
+  items,
+  /// Whether to justify the pills (default: true)
+  /// -> boolean
+  justify: true,
+) = (
   context {
     let theme = __st-theme.final()
 
@@ -102,8 +133,13 @@
 )
 
 /// Displays an email link.
-/// - email (string): Email address
-#let email-link(email) = context {
+///
+/// -> content
+#let email-link(
+  /// Email address
+  /// -> string
+  email,
+) = context {
   link("mailto:" + email)[#text(
       email,
       fill: __st-theme.final().accent-color,
@@ -114,16 +150,23 @@
 // ---- Entry Blocks ----
 
 /// Generic entry for education, experience, etc.
-/// - title (string): Entry title
-/// - date (string): Date or range
-/// - institution (string): Institution or company
-/// - location (string): Location
-/// - description (content): Description/details
+///
+/// -> content
 #let entry(
+  /// Entry title
+  /// -> string | none
   title: none,
+  /// Date or range
+  /// -> string
   date: "",
+  /// Institution or company
+  /// -> string
   institution: "",
+  /// Location
+  /// -> string
   location: "",
+  /// Description/details
+  /// -> content
   description,
 ) = {
   context block(above: 1em, below: 0.65em)[
@@ -158,10 +201,19 @@
 }
 
 /// Entry with a level bar (e.g., for skills).
-/// - title (string): Item name
-/// - level (int): Level value
-/// - subtitle (string): Optional subtitle
-#let item-with-level(title, level, subtitle: "") = (
+///
+/// -> content
+#let item-with-level(
+  /// Item name
+  /// -> string
+  title,
+  /// Level value
+  /// -> int
+  level,
+  /// Optional subtitle
+  /// -> string
+  subtitle: "",
+) = (
   context {
     let theme = __st-theme.final()
 
@@ -178,6 +230,8 @@
 // ---- Social & Contact Info ----
 
 /// Displays all available social links for the author.
+///
+/// -> content
 #let social-links() = (
   context {
     let author = __st-author.final()
@@ -224,6 +278,8 @@
 )
 
 /// Displays the author's contact information (email, phone, address).
+///
+/// -> content
 #let contact-info() = (
   context [
     #let author = __st-author.final()
@@ -272,10 +328,19 @@
 // ---- Publications ----
 
 /// Formats a publication entry (article, conference, etc.).
-/// - pub (dictionary): Publication data
-/// - highlight-authors (array): Authors to highlight
-/// - max-authors (int): Max authors to display before "et al."
-#let __format-publication-entry(pub, highlight-authors, max-authors) = {
+///
+/// -> content
+#let __format-publication-entry(
+  /// Publication data
+  /// -> dictionary
+  pub,
+  /// Authors to highlight
+  /// -> array
+  highlight-authors,
+  /// Max authors to display before "et al."
+  /// -> int
+  max-authors,
+) = {
   for (i, author) in pub.author.enumerate() {
     if i < max-authors {
       let author-display = {
@@ -348,10 +413,19 @@
 }
 
 /// Displays publications grouped by year from a Hayagriva YAML file.
-/// - yaml-data (dictionary): Data loaded from YAML file
-/// - highlight-authors (array): Authors to highlight
-/// - max-authors (int): Max authors to display per entry
-#let publications(yaml-data, highlight-authors: (), max-authors: 10) = (
+///
+/// -> content
+#let publications(
+  /// Data loaded from YAML file
+  /// -> dictionary
+  yaml-data,
+  /// Authors to highlight
+  /// -> array
+  highlight-authors: (),
+  /// Max authors to display per entry
+  /// -> int
+  max-authors: 10,
+) = (
   context {
     let theme = __st-theme.final()
     let publication-data = yaml-data.values()
@@ -402,32 +476,47 @@
 // ---- Main CV Template ----
 
 /// Main CV layout. Sets up theme, fonts, page, and structure.
-/// - author (dictionary): Author information (firstname, lastname, etc.)
-/// - profile-picture (image): Profile picture
-/// - accent-color (color): Accent color for highlights
-/// - font-color (color): Main text color
-/// - header-color (color): Color for header background
-/// - date (string): Date string for footer
-/// - heading-font (string): Font for headings
-/// - body-font (array): Font(s) for body text
-/// - paper-size (string): Paper size
-/// - side-width (length): Sidebar width
-/// - gdpr (boolean): Add GDPR data usage in the footer
-/// - footer (content): Optional custom footer
-/// - body (content): Main content of the CV
+///
+/// -> content
 #let cv(
+  /// Author information (firstname, lastname, etc.)
+  /// -> dictionary
   author: (:),
+  /// Profile picture
+  /// -> image | none
   profile-picture: none,
+  /// Accent color for highlights
+  /// -> color
   accent-color: rgb("#408abb"),
+  /// Main text color
+  /// -> color
   font-color: rgb("#333333"),
+  /// Color for header background
+  /// -> color
   header-color: luma(50),
+  /// Date string for footer
+  /// -> string
   date: datetime.today().display("[month repr:long] [year]"),
+  /// Font for headings
+  /// -> string
   heading-font: "Fira Sans",
+  /// Font(s) for body text
+  /// -> array
   body-font: ("Noto Sans", "Roboto"),
+  /// Paper size
+  /// -> string
   paper-size: "us-letter",
+  /// Sidebar width
+  /// -> length
   side-width: 4cm,
+  /// Add GDPR data usage in the footer
+  /// -> boolean
   gdpr: false,
+  /// Optional custom footer
+  /// -> content | auto
   footer: auto,
+  /// Main content of the CV
+  /// -> content
   body,
 ) = {
   context {
@@ -600,7 +689,12 @@
 }
 
 /// Defines sidebar content for the CV.
-/// - content (content): Content to display in the sidebar
-#let side(content) = {
+///
+/// -> content
+#let side(
+  /// Content to display in the sidebar
+  /// -> content
+  content,
+) = {
   context state("side-content").update(content)
 }
