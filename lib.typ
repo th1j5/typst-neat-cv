@@ -61,8 +61,10 @@
       align(
         center + horizon,
         [
-          #v(-0.15 * size)
-          #fa-icon(icon, fill: white, size: size - .5em)
+          #v(
+            -0.15 * size,
+          )  // Adjust vertical position slightly to center the icon
+          #fa-icon(icon, fill: white, size: size - .55em)
         ],
       ),
     )
@@ -330,21 +332,21 @@
 
     #if "email" in author {
       contact-items += (
-        fa-icon("at", fill: accent-color),
-        link("mailto:" + author.email)[#text(author.email)],
+        [#v(-0.2em) #fa-icon("envelope", fill: accent-color)],
+        link("mailto:" + author.email, author.email),
       )
     }
 
     #if "phone" in author {
       contact-items += (
-        fa-icon("mobile-screen", fill: accent-color),
-        link("tel:" + author.phone)[#text(author.phone)],
+        [#v(-0.2em) #fa-icon("mobile-screen", fill: accent-color)],
+        link("tel:" + author.phone, author.phone),
       )
     }
 
     #if "address" in author {
       contact-items += (
-        fa-icon("envelope", fill: accent-color),
+        [#v(-0.2em) #fa-icon("map", fill: accent-color)],
         author.address,
       )
     }
@@ -352,7 +354,7 @@
     #if contact-items.len() > 0 {
       table(
         columns: (1em, 1fr),
-        align: (left, left),
+        align: (center, left),
         inset: 0pt,
         column-gutter: 0.5em,
         row-gutter: 1em,
