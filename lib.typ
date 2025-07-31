@@ -182,11 +182,8 @@
   /// Email address
   /// -> string
   email,
-) = context {
-  link("mailto:" + email)[#text(
-      email,
-      fill: __st-theme.final().accent-color,
-    )]
+) = {
+  link("mailto:" + email, email)
 }
 
 
