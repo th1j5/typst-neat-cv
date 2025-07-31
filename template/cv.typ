@@ -28,6 +28,7 @@
   // date: datetime.today().display("[month repr:long] [year]"),
   // heading-font: "Fira Sans",
   // body-font: ("Noto Sans", "Roboto"),
+  // body-font-size: 10.5pt,
   // paper-size: "us-letter",
   // side-width: 4cm,
   // gdpr: false,
@@ -188,14 +189,6 @@
   institution: "Hill Valley Science Society",
   location: "Hill Valley, CA, USA",
   "Awarded for outstanding contributions to science and innovation in the community.",
-)
-
-#entry(
-  title: "National Science Foundation Grant",
-  date: "1982",
-  institution: "NSF",
-  location: "USA",
-  "Grant for research on high-energy particle acceleration and temporal field theory.",
 )
 
 #colbreak()

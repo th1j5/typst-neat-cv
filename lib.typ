@@ -540,7 +540,7 @@
   body-font: ("Noto Sans", "Roboto"),
   /// Font size for body text
   /// -> length
-  body-font-size: 10pt,
+  body-font-size: 10.5pt,
   /// Paper size
   /// -> string
   paper-size: "us-letter",
