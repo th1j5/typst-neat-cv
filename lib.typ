@@ -23,6 +23,13 @@
   bottom: HORIZONTAL_PAGE_MARGIN,
 )
 
+// ---- Utility ----
+/// Calculate/scale the length of stroke elements, as strokes are visual
+/// elements and should have a constant length.
+///
+/// -> length
+#let __stroke_length(x) = x * 1pt
+
 
 // ---- Icon & Visual Helpers ----
 
@@ -115,7 +122,7 @@
       fill: if (l < level) {
         _accent-color
       },
-      stroke: _accent-color + 0.075em / SIDE_CONTENT_FONT_SIZE_SCALE,
+      stroke: _accent-color + __stroke_length(0.75),
     ))
     grid(
       columns: (col-width,) * max-level,
@@ -149,7 +156,7 @@
             x: 0.45em / ITEM_PILLS_FONT_SIZE_SCALE,
             y: 0.45em / ITEM_PILLS_FONT_SIZE_SCALE,
           ),
-          stroke: theme.accent-color + 0.08em / ITEM_PILLS_FONT_SIZE_SCALE,
+          stroke: theme.accent-color + __stroke_length(0.5),
           item,
         ))
         .join(" "),
@@ -685,7 +692,7 @@
     if profile-picture != none {
       block(
         clip: true,
-        stroke: accent-color + 0.1em / SIDE_CONTENT_FONT_SIZE_SCALE,
+        stroke: accent-color + __stroke_length(1),
         radius: side-width / 2,
         width: 100%,
         profile-picture,
@@ -727,7 +734,7 @@
       }
     },
     side-content,
-    grid.vline(stroke: luma(180) + 0.05em),
+    grid.vline(stroke: luma(180) + __stroke_length(0.5)),
     body-content,
   )
 }
