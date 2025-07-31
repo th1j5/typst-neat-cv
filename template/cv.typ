@@ -1,6 +1,6 @@
-#import "@preview/neat-cv:0.2.1": (
-  contact-info, cv, entry, item-pills, item-with-level, publications, side,
-  social-links,
+#import "@preview/neat-cv:0.3.0": (
+  contact-info, cv, email-link, entry, item-pills, item-with-level,
+  publications, side, social-links,
 )
 
 #show: cv.with(
@@ -234,7 +234,7 @@
   location: "Hill Valley, CA, USA",
   [
     Long-term collaborator and field assistant in temporal experiments.\
-    Contact: #link("mailto:marty.mcfly@hillvalley.com", "marty.mcfly@hillvalley.com")
+    Contact: #email-link("marty.mcfly@hillvalley.com")
   ],
 )
 
@@ -244,6 +244,6 @@
   location: "Hill Valley, CA, USA",
   [
     Advisor on science communication and educational outreach.\
-    Contact: #link("mailto:clara.clayton@hillvalley.edu", "clara.clayton@hillvalley.edu")
+    Contact: #email-link("clara.clayton@hillvalley.edu")
   ],
 )

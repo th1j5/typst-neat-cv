@@ -50,7 +50,7 @@ To install the icons, you need to download the "FontAwesome Free For Desktop" pa
 Here is a basic usage example:
 
 ```typst
-#import "@preview/neat-cv:0.2.1": cv, side, entry, item-with-level, contact-info, social-links
+#import "@preview/neat-cv:0.3.0": cv, side, entry, item-with-level, contact-info, social-links
 
 #show: cv.with(
   author: (
