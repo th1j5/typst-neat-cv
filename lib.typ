@@ -26,6 +26,8 @@
 #let LEVEL_BAR_GAP_SIZE = 2pt
 /// Height of the box of each individual section in the level bar
 #let LEVEL_BAR_BOX_HEIGHT = 3.5pt
+/// Width of the left column in an `entry()` or `publication()`
+#let ENTRY_LEFT_COLUMN_WIDTH = 5.7em
 
 // ---- Utility ----
 /// Calculate/scale the length of stroke elements, as strokes are visual
@@ -206,7 +208,7 @@
     #let theme = __st-theme.final()
 
     #grid(
-      columns: (5.7em, auto),
+      columns: (ENTRY_LEFT_COLUMN_WIDTH, auto),
       align: (right, left),
       column-gutter: .8em,
       [
@@ -482,7 +484,7 @@
 
     for year in publications-by-year.keys().sorted().rev() {
       grid(
-        columns: (5.7em, auto),
+        columns: (ENTRY_LEFT_COLUMN_WIDTH, auto),
         align: (right, left),
         column-gutter: .8em,
         [
