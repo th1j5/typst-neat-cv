@@ -727,13 +727,13 @@
   v(HEADER_BODY_GAP)
 
   grid(
-    columns: (side-width + 1.68em, auto),
+    columns: (side-width + (HORIZONTAL_PAGE_MARGIN / 2), auto),
     align: (left, left),
     inset: (col, _) => {
       if col == 0 {
-        (right: 1.68em, y: 0.28em)
+        (right: (HORIZONTAL_PAGE_MARGIN / 2), y: 1mm)
       } else {
-        (left: 1.68em, y: 0.28em)
+        (left: (HORIZONTAL_PAGE_MARGIN / 2), y: 1mm)
       }
     },
     side-content,
