@@ -4,6 +4,38 @@
 #let __st-theme = state("theme")
 #let __st-author = state("author")
 
+// ---- Constants ----
+/// Scaling factor to apply to the body font size to obtain the side-content font size.
+#let SIDE_CONTENT_FONT_SIZE_SCALE = 0.72
+/// Scaling factor to apply to the body font size to obtain the item-pills font size.
+#let ITEM_PILLS_FONT_SIZE_SCALE = 0.85
+/// Scaling factor to apply to the body font size to obtain the footer font size.
+#let FOOTER_FONT_SIZE_SCALE = 0.7
+/// Gap between the header (colored block at the top) and body
+#let HEADER_BODY_GAP = 2mm
+/// Horizontal page margin
+#let HORIZONTAL_PAGE_MARGIN = 12mm
+/// All page margins, defined explicitly
+#let PAGE_MARGIN = (
+  left: HORIZONTAL_PAGE_MARGIN,
+  right: HORIZONTAL_PAGE_MARGIN,
+  top: HORIZONTAL_PAGE_MARGIN - HEADER_BODY_GAP,
+  bottom: HORIZONTAL_PAGE_MARGIN,
+)
+/// Length of the gap between individual sections of the level bar
+#let LEVEL_BAR_GAP_SIZE = 2pt
+/// Height of the box of each individual section in the level bar
+#let LEVEL_BAR_BOX_HEIGHT = 3.5pt
+/// Width of the left column in an `entry()` or `publication()`
+#let ENTRY_LEFT_COLUMN_WIDTH = 5.7em
+
+// ---- Utility ----
+/// Calculate/scale the length of stroke elements, as strokes are visual
+/// elements and should have a constant length.
+///
+/// -> length
+#let __stroke_length(x) = x * 1pt
+
 
 // ---- Icon & Visual Helpers ----
 
@@ -55,7 +87,7 @@
 
     block(width: 100%, height: size, radius: 0.6em, align(horizon, [
       #__fa-icon-outline(icon, size: size)
-      #box(inset: (left: 1pt), height: 100%, link(url)[#display])
+      #box(inset: (left: 0.2em), height: 100%, link(url)[#display])
     ]))
   }
 )
@@ -86,18 +118,18 @@
     } else {
       accent-color
     }
-    let col-width = (width - 2pt * (max-level - 1)) / max-level
+    let col-width = (width - LEVEL_BAR_GAP_SIZE * (max-level - 1)) / max-level
     let levels = range(max-level).map(l => box(
-      height: 3.5pt,
+      height: LEVEL_BAR_BOX_HEIGHT,
       width: 100%,
       fill: if (l < level) {
         _accent-color
       },
-      stroke: _accent-color + 0.75pt,
+      stroke: _accent-color + __stroke_length(0.75),
     ))
     grid(
       columns: (col-width,) * max-level,
-      gutter: 2pt,
+      gutter: LEVEL_BAR_GAP_SIZE,
       ..levels
     )
   }
@@ -117,14 +149,17 @@
   context {
     let theme = __st-theme.final()
 
-    set text(size: 0.85em, spacing: 0.5em)
+    set text(size: ITEM_PILLS_FONT_SIZE_SCALE * 1em, spacing: 0.5em)
     set par(justify: justify)
 
     block(
       items
         .map(item => box(
-          inset: (x: 3pt, y: 3pt),
-          stroke: theme.accent-color + 0.5pt,
+          inset: (
+            x: 0.45em / ITEM_PILLS_FONT_SIZE_SCALE,
+            y: 0.45em / ITEM_PILLS_FONT_SIZE_SCALE,
+          ),
+          stroke: theme.accent-color + __stroke_length(0.5),
           item,
         ))
         .join(" "),
@@ -173,7 +208,7 @@
     #let theme = __st-theme.final()
 
     #grid(
-      columns: (2cm, auto),
+      columns: (ENTRY_LEFT_COLUMN_WIDTH, auto),
       align: (right, left),
       column-gutter: .8em,
       [
@@ -449,7 +484,7 @@
 
     for year in publications-by-year.keys().sorted().rev() {
       grid(
-        columns: (2cm, auto),
+        columns: (ENTRY_LEFT_COLUMN_WIDTH, auto),
         align: (right, left),
         column-gutter: .8em,
         [
@@ -503,6 +538,9 @@
   /// Font(s) for body text
   /// -> array
   body-font: ("Noto Sans", "Roboto"),
+  /// Font size for body text
+  /// -> length
+  body-font-size: 10pt,
   /// Paper size
   /// -> string
   paper-size: "us-letter",
@@ -548,25 +586,36 @@
     }
   )
 
-  set text(font: body-font, size: 10pt, weight: "light", fill: font-color)
+  set text(
+    font: body-font,
+    size: body-font-size,
+    weight: "light",
+    fill: font-color,
+  )
 
   set page(
     paper: paper-size,
-    margin: (left: 12mm, right: 12mm, top: 10mm, bottom: 12mm),
+    margin: PAGE_MARGIN,
     footer: if footer == auto {
       [
-        #set text(size: 0.7em, fill: font-color.lighten(50%))
+        #set text(
+          size: FOOTER_FONT_SIZE_SCALE * 1em,
+          fill: font-color.lighten(50%),
+        )
 
         #grid(
           columns: (side-width, 1fr),
           align: center,
-          gutter: 12mm,
+          gutter: HORIZONTAL_PAGE_MARGIN,
           inset: 0pt,
           [
             #context counter(page).display("1 / 1", both: true)
           ],
           [
-            #author.firstname #author.lastname CV #box(inset: (x: 3pt), sym.dot.c) #text(date)
+            #author.firstname #author.lastname CV #box(
+              inset: (x: 0.3em / FOOTER_FONT_SIZE_SCALE),
+              sym.dot.c,
+            ) #text(date)
           ],
 
           [],
@@ -599,7 +648,7 @@
       )[
         #align(center)[
           #let position = if type(author.position) == array {
-            author.position.join(box(inset: (x: 5pt), sym.dot.c))
+            author.position.join(box(inset: (x: 0.5em), sym.dot.c))
           } else {
             author.position
           }
@@ -625,7 +674,7 @@
   }
 
   let side-content = context {
-    set text(size: 0.72em)
+    set text(size: SIDE_CONTENT_FONT_SIZE_SCALE * 1em)
 
     show heading.where(level: 1): it => block(width: 100%, above: 2em)[
       #set text(font: heading-font, fill: accent-color, weight: "regular")
@@ -633,7 +682,12 @@
       #grid(
         columns: (0pt, 1fr),
         align: horizon,
-        box(fill: accent-color, width: -4pt, height: 12pt, outset: (left: 6pt)),
+        box(
+          fill: accent-color,
+          width: -0.29em / SIDE_CONTENT_FONT_SIZE_SCALE,
+          height: 0.86em / SIDE_CONTENT_FONT_SIZE_SCALE,
+          outset: (left: 0.43em / SIDE_CONTENT_FONT_SIZE_SCALE),
+        ),
         it.body,
       )
     ]
@@ -641,7 +695,7 @@
     if profile-picture != none {
       block(
         clip: true,
-        stroke: accent-color + 1pt,
+        stroke: accent-color + __stroke_length(1),
         radius: side-width / 2,
         width: 100%,
         profile-picture,
@@ -670,20 +724,20 @@
 
   head
 
-  v(2mm)
+  v(HEADER_BODY_GAP)
 
   grid(
-    columns: (side-width + 6mm, auto),
+    columns: (side-width + (HORIZONTAL_PAGE_MARGIN / 2), auto),
     align: (left, left),
     inset: (col, _) => {
       if col == 0 {
-        (right: 6mm, y: 1mm)
+        (right: (HORIZONTAL_PAGE_MARGIN / 2), y: 1mm)
       } else {
-        (left: 6mm, y: 1mm)
+        (left: (HORIZONTAL_PAGE_MARGIN / 2), y: 1mm)
       }
     },
     side-content,
-    grid.vline(stroke: luma(180) + 0.5pt),
+    grid.vline(stroke: luma(180) + __stroke_length(0.5)),
     body-content,
   )
 }
