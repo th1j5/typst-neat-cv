@@ -36,7 +36,7 @@ jobs:
         uses: ./.github/actions/setup-fonts
         with:
           manifest-path: manifest.yml
-          font-awesome-version: "6.7.2"
+          font-awesome-version: "7.0.0"
 
       - name: Setup Just
         uses: extractions/setup-just@v3
