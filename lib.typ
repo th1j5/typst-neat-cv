@@ -22,6 +22,10 @@
   top: HORIZONTAL_PAGE_MARGIN - HEADER_BODY_GAP,
   bottom: HORIZONTAL_PAGE_MARGIN,
 )
+/// Length of the gap between individual sections of the level bar
+#let LEVEL_BAR_GAP_SIZE = 2pt
+/// Height of the box of each individual section in the level bar
+#let LEVEL_BAR_BOX_HEIGHT = 3.5pt
 
 // ---- Utility ----
 /// Calculate/scale the length of stroke elements, as strokes are visual
@@ -112,12 +116,9 @@
     } else {
       accent-color
     }
-    let col-width = (
-      (width - (0.2em / SIDE_CONTENT_FONT_SIZE_SCALE) * (max-level - 1))
-        / max-level
-    )
+    let col-width = (width - LEVEL_BAR_GAP_SIZE * (max-level - 1)) / max-level
     let levels = range(max-level).map(l => box(
-      height: 0.35em / SIDE_CONTENT_FONT_SIZE_SCALE,
+      height: LEVEL_BAR_BOX_HEIGHT,
       width: 100%,
       fill: if (l < level) {
         _accent-color
@@ -126,7 +127,7 @@
     ))
     grid(
       columns: (col-width,) * max-level,
-      gutter: 0.2em / SIDE_CONTENT_FONT_SIZE_SCALE,
+      gutter: LEVEL_BAR_GAP_SIZE,
       ..levels
     )
   }
