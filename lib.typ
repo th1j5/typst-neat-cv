@@ -11,6 +11,17 @@
 #let ITEM_PILLS_FONT_SIZE_SCALE = 0.85
 /// Scaling factor to apply to the body font size to obtain the footer font size.
 #let FOOTER_FONT_SIZE_SCALE = 0.7
+/// Gap between the header (colored block at the top) and body
+#let HEADER_BODY_GAP = 2mm
+/// Horizontal page margin
+#let HORIZONTAL_PAGE_MARGIN = 12mm
+/// All page margins, defined explicitly
+#let PAGE_MARGIN = (
+  left: HORIZONTAL_PAGE_MARGIN,
+  right: HORIZONTAL_PAGE_MARGIN,
+  top: HORIZONTAL_PAGE_MARGIN - HEADER_BODY_GAP,
+  bottom: HORIZONTAL_PAGE_MARGIN,
+)
 
 
 // ---- Icon & Visual Helpers ----
@@ -574,7 +585,7 @@
 
   set page(
     paper: paper-size,
-    margin: (left: 12mm, right: 12mm, top: 10mm, bottom: 12mm),
+    margin: PAGE_MARGIN,
     footer: if footer == auto {
       [
         #set text(
@@ -585,7 +596,7 @@
         #grid(
           columns: (side-width, 1fr),
           align: center,
-          gutter: 1.2em / FOOTER_FONT_SIZE_SCALE,
+          gutter: HORIZONTAL_PAGE_MARGIN,
           inset: 0pt,
           [
             #context counter(page).display("1 / 1", both: true)
@@ -703,7 +714,7 @@
 
   head
 
-  v(0.56em)
+  v(HEADER_BODY_GAP)
 
   grid(
     columns: (side-width + 1.68em, auto),
