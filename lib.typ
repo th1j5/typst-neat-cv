@@ -61,9 +61,8 @@
       align(
         center + horizon,
         [
-          #v(
-            -0.15 * size,
-          )  // Adjust vertical position slightly to center the icon
+          // Adjust vertical position slightly to center the icon
+          #v(-0.15 * size)
           #fa-icon(icon, fill: white, size: size - .55em)
         ],
       ),
