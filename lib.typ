@@ -61,8 +61,9 @@
       align(
         center + horizon,
         [
+          // Adjust vertical position slightly to center the icon
           #v(-0.15 * size)
-          #fa-icon(icon, fill: white, size: size - .5em)
+          #fa-icon(icon, fill: white, size: size - .55em)
         ],
       ),
     )
@@ -180,11 +181,8 @@
   /// Email address
   /// -> string
   email,
-) = context {
-  link("mailto:" + email)[#text(
-      email,
-      fill: __st-theme.final().accent-color,
-    )]
+) = {
+  link("mailto:" + email, email)
 }
 
 
@@ -228,11 +226,8 @@
         #text(size: 0.9em, smallcaps([
           #institution
           #h(1fr)
-          #fa-icon(
-            "location-dot",
-            size: 0.85em,
-            fill: theme.accent-color,
-          ) #location
+          #fa-icon("location-dot", size: 0.85em, fill: theme.accent-color)
+          #location
         ]))
 
         #text(size: 0.9em, description)
@@ -258,7 +253,7 @@
   context {
     let theme = __st-theme.final()
 
-    block()[
+    block[
       #text(title)
       #h(1fr)
       #text(fill: theme.font-color.lighten(40%), subtitle)
@@ -330,21 +325,21 @@
 
     #if "email" in author {
       contact-items += (
-        fa-icon("at", fill: accent-color),
-        link("mailto:" + author.email)[#text(author.email)],
+        [#v(-0.2em) #fa-icon("envelope", fill: accent-color)],
+        link("mailto:" + author.email, author.email),
       )
     }
 
     #if "phone" in author {
       contact-items += (
-        fa-icon("mobile-screen", fill: accent-color),
-        link("tel:" + author.phone)[#text(author.phone)],
+        [#v(-0.2em) #fa-icon("mobile-screen", fill: accent-color)],
+        link("tel:" + author.phone, author.phone),
       )
     }
 
     #if "address" in author {
       contact-items += (
-        fa-icon("envelope", fill: accent-color),
+        [#v(-0.2em) #fa-icon("map", fill: accent-color)],
         author.address,
       )
     }
@@ -352,7 +347,7 @@
     #if contact-items.len() > 0 {
       table(
         columns: (1em, 1fr),
-        align: (left, left),
+        align: (center, left),
         inset: 0pt,
         column-gutter: 0.5em,
         row-gutter: 1em,
@@ -581,10 +576,7 @@
         author: (
           author.at("firstname", default: "")
             + " "
-            + author.at(
-              "lastname",
-              default: "",
-            )
+            + author.at("lastname", default: "")
         ),
       )
 
@@ -618,10 +610,9 @@
             #context counter(page).display("1 / 1", both: true)
           ],
           [
-            #author.firstname #author.lastname CV #box(
-              inset: (x: 0.3em / FOOTER_FONT_SIZE_SCALE),
-              sym.dot.c,
-            ) #text(date)
+            #author.firstname #author.lastname CV
+            #box(inset: (x: 0.3em / FOOTER_FONT_SIZE_SCALE), sym.dot.c)
+            #text(date)
           ],
 
           [],
@@ -662,9 +653,8 @@
           #set text(fill: white, font: heading-font)
 
           #text(size: 3em)[
-            #text(weight: "light")[#author.firstname] #text(
-              weight: "medium",
-            )[#author.lastname]
+            #text(weight: "light")[#author.firstname]
+            #text(weight: "medium")[#author.lastname]
           ]
 
           #v(-0.5em)
@@ -673,7 +663,9 @@
             size: 0.95em,
             fill: luma(200),
             weight: "regular",
-          )[#smallcaps(position)]
+          )[
+            #smallcaps(position)
+          ]
         ]
       ]
     }

@@ -1,4 +1,4 @@
-#import "@preview/neat-cv:0.3.0": (
+#import "@preview/neat-cv:0.3.1": (
   contact-info, cv, email-link, entry, item-pills, item-with-level,
   publications, side, social-links,
 )
