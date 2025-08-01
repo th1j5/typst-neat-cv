@@ -227,11 +227,8 @@
         #text(size: 0.9em, smallcaps([
           #institution
           #h(1fr)
-          #fa-icon(
-            "location-dot",
-            size: 0.85em,
-            fill: theme.accent-color,
-          ) #location
+          #fa-icon("location-dot", size: 0.85em, fill: theme.accent-color)
+          #location
         ]))
 
         #text(size: 0.9em, description)
@@ -257,7 +254,7 @@
   context {
     let theme = __st-theme.final()
 
-    block()[
+    block[
       #text(title)
       #h(1fr)
       #text(fill: theme.font-color.lighten(40%), subtitle)
@@ -602,9 +599,7 @@
       [
         #set text(
           size: FOOTER_FONT_SIZE_SCALE * 1em,
-          fill: font-color.lighten(
-            50%,
-          ),
+          fill: font-color.lighten(50%),
         )
 
         #grid(
@@ -616,10 +611,9 @@
             #context counter(page).display("1 / 1", both: true)
           ],
           [
-            #author.firstname #author.lastname CV #box(
-              inset: (x: 0.3em / FOOTER_FONT_SIZE_SCALE),
-              sym.dot.c,
-            ) #text(date)
+            #author.firstname #author.lastname CV
+            #box(inset: (x: 0.3em / FOOTER_FONT_SIZE_SCALE), sym.dot.c)
+            #text(date)
           ],
 
           [],
@@ -660,9 +654,8 @@
           #set text(fill: white, font: heading-font)
 
           #text(size: 3em)[
-            #text(weight: "light")[#author.firstname] #text(
-              weight: "medium",
-            )[#author.lastname]
+            #text(weight: "light")[#author.firstname]
+            #text(weight: "medium")[#author.lastname]
           ]
 
           #v(-0.5em)
