@@ -580,10 +580,7 @@
         author: (
           author.at("firstname", default: "")
             + " "
-            + author.at(
-              "lastname",
-              default: "",
-            )
+            + author.at("lastname", default: "")
         ),
       )
 
@@ -605,7 +602,9 @@
       [
         #set text(
           size: FOOTER_FONT_SIZE_SCALE * 1em,
-          fill: font-color.lighten(50%),
+          fill: font-color.lighten(
+            50%,
+          ),
         )
 
         #grid(
@@ -672,7 +671,9 @@
             size: 0.95em,
             fill: luma(200),
             weight: "regular",
-          )[#smallcaps(position)]
+          )[
+            #smallcaps(position)
+          ]
         ]
       ]
     }
