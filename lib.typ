@@ -334,6 +334,13 @@
       )
     }
 
+    #if "matrix" in author {
+      contact-items += (
+        [#v(-0.2em) #fa-icon("comment", fill: accent-color)],
+        link("https://matrix.to/#/" + author.matrix, author.matrix),
+      )
+    }
+
     #if "phone" in author {
       contact-items += (
         [#v(-0.2em) #fa-icon("mobile-screen", fill: accent-color)],
