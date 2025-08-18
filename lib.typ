@@ -409,7 +409,7 @@
         if first_names_str == "" {
           [#last_name]
         } else {
-          [#last_name, #joined_initials]
+          [#joined_initials #last_name]
         }
       }
 
@@ -421,18 +421,18 @@
 
       if i < max-authors - 1 and i < pub.author.len() - 1 {
         if i == pub.author.len() - 2 {
-          [ and ]
+          [, and ]
         } else {
           [, ]
         }
       }
     } else if i == max-authors {
-      [_ et al_]
+      [, _et al_]
       break
     }
   }
 
-  [. #pub.title.]
+  [, "#pub.title.replace(regex("[{}]"), "")",]
 
   let parent = pub.parent
 
@@ -440,23 +440,29 @@
     [ in ]
   }
 
-  [ #text(style: "italic", parent.title)]
+  [ _#parent.title.replace(regex("[{}]"), "")_]
 
   if "volume" in parent and parent.volume != none {
-    [ #text(style: "italic", str(parent.volume)), ]
+    [ _#(parent.volume)_]
   }
 
-  [ #pub.at("page-range", default: "")]
+  if "issue" in parent and parent.issue != none {
+    [_(#parent.issue)_]
+  }
+
+  if "page-range" in pub and pub.page-range != none {
+    [_:#(pub.page-range)_]
+  }
 
   if "date" in pub {
-    [ (#pub.date).]
+    [, #str(pub.date).split("-").at(0)]
   }
 
   if "serial-number" in pub and "doi" in pub.serial-number {
-    [
-      doi: #link("https://doi.org/" + pub.serial-number.doi)[#text(style: "italic", str(pub.serial-number.doi))]
-    ]
+    [, doi: #link("https://doi.org/" + pub.serial-number.doi)[_#(pub.serial-number.doi)_]]
   }
+
+  [.]
 }
 
 /// Displays publications grouped by year from a Hayagriva YAML file.
@@ -481,7 +487,7 @@
     set block(above: 0.7em, width: 100%)
 
     for pub in publication-data {
-      let year = str(pub.at("date", default: ""))
+      let year = str(pub.at("date", default: "")).split("-").at(0)
 
       if year == "" {
         continue
