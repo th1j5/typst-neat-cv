@@ -2,7 +2,7 @@
 name = "neat-cv"
 version = "0.4.0"
 entrypoint = "lib.typ"
-authors = ["Diego Alvarez S. <@dialvarez>"]
+authors = ["Diego Alvarez S. <@dialvarezs>"]
 license = "MIT"
 description = "A modern and elegant CV template for Typst, inspired by Awesome CV and simple-hisptercv."
 repository = "https://github.com/dialvarezs/neat-cv"
