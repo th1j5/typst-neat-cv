@@ -682,9 +682,11 @@
 
   let side-content = context {
     set text(size: SIDE_CONTENT_FONT_SIZE_SCALE * 1em)
+    show heading: set text(font: heading-font, fill: accent-color, weight: "regular")
 
     show heading.where(level: 1): it => block(width: 100%, above: 2em)[
-      #set text(font: heading-font, fill: accent-color, weight: "regular")
+      #set text(weight: "semibold")
+      #show: smallcaps
 
       #grid(
         columns: (0pt, 1fr),
