@@ -27,7 +27,7 @@
 /// Height of the box of each individual section in the level bar
 #let LEVEL_BAR_BOX_HEIGHT = 3.5pt
 /// Width of the left column in an `entry()` or `publication()`
-#let ENTRY_LEFT_COLUMN_WIDTH = 5.7em
+#let ENTRY_LEFT_COLUMN_WIDTH = 4.2em
 
 // ---- Utility ----
 /// Calculate/scale the length of stroke elements, as strokes are visual
@@ -225,6 +225,7 @@
 
         #text(size: 0.9em, smallcaps([
           #if institution != "" or location != "" [
+            //#text(institution, fill: theme.accent-color)
             #institution
             #h(1fr)
             #if location != "" [
@@ -234,6 +235,7 @@
           ]
         ]))
 
+        //#v(0.5em)
         #text(size: 0.9em, description)
       ],
     )
