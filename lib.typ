@@ -621,7 +621,7 @@
         #grid(
           columns: (side-width, 1fr),
           align: center,
-          gutter: HORIZONTAL_PAGE_MARGIN,
+          gutter: 2mm,//HORIZONTAL_PAGE_MARGIN,
           inset: 0pt,
           [
             #context counter(page).display("1 / 1", both: true)
@@ -633,12 +633,10 @@
           ],
 
           [],
-          if gdpr {
-            [
+          if gdpr [
               I authorise the processing of personal data contained within my CV,
               according to GDPR (EU) 2016/679, Article 6.1(a).
-            ]
-          },
+          ],
         )
       ]
     } else {
