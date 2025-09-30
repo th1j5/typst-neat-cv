@@ -586,19 +586,13 @@
     __st-author.update(author)
   }
 
-  show: body => (
-    context {
-      set document(
-        title: "Curriculum Vitae",
-        author: (
-          author.at("firstname", default: "")
-            + " "
-            + author.at("lastname", default: "")
-        ),
-      )
-
-      body
-    }
+  set document(
+    title: "Curriculum Vitae",
+    author: (
+      author.at("firstname", default: "")
+        + " "
+        + author.at("lastname", default: "")
+    ),
   )
 
   set text(
