@@ -639,6 +639,7 @@
   )
 
   set par(spacing: 0.75em, justify: true)
+  show footnote.entry: set text(size: FOOTER_FONT_SIZE_SCALE * 1.1em)
 
   let head = {
     context {
