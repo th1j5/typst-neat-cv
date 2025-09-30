@@ -327,6 +327,20 @@
     #let accent-color = theme.accent-color
     #let contact-items = ()
 
+    #if "address" in author {
+      contact-items += (
+        [#v(-0.2em) #fa-icon("map", fill: accent-color)],
+        author.address,
+      )
+    }
+
+    #if "phone" in author {
+      contact-items += (
+        [#v(-0.2em) #fa-icon("mobile-screen", fill: accent-color)],
+        link("tel:" + author.phone, author.phone),
+      )
+    }
+
     #if "email" in author {
       contact-items += (
         [#v(-0.2em) #fa-icon("envelope", fill: accent-color)],
@@ -341,19 +355,6 @@
       )
     }
 
-    #if "phone" in author {
-      contact-items += (
-        [#v(-0.2em) #fa-icon("mobile-screen", fill: accent-color)],
-        link("tel:" + author.phone, author.phone),
-      )
-    }
-
-    #if "address" in author {
-      contact-items += (
-        [#v(-0.2em) #fa-icon("map", fill: accent-color)],
-        author.address,
-      )
-    }
 
     #if contact-items.len() > 0 {
       table(
