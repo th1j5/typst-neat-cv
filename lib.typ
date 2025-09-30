@@ -355,6 +355,12 @@
       )
     }
 
+    #if "birthdate" in author {
+      contact-items += (
+        [#v(-0.2em) #fa-icon("star-of-life", fill: accent-color)],
+        author.birthdate,
+      )
+    }
 
     #if contact-items.len() > 0 {
       table(
