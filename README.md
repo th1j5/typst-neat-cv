@@ -22,7 +22,7 @@ A modern and elegant CV template for Typst, inspired by [Awesome CV](https://git
 
 #### Text Fonts
 
-By default, this template uses the Fira Sans and Noto Sans fonts.
+By default, this template uses the Fira Sans and Noto Sans fonts. Roboto is used as a fallback font if Noto Sans is not available.
 
 If you use the template through the webapp (https://typst.app), you don't need to do anything.
 
