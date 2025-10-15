@@ -533,10 +533,13 @@
     }
   }
 )
+
 #let head(
   header-color: none,
   heading-font: none,
   author: none,
+  alignment: center,
+  body: none,
 ) = {
   context {
     block(
@@ -549,7 +552,7 @@
       ),
       inset: (bottom: page.margin.top),
     )[
-      #align(center)[
+      #align(alignment)[
         #let position = if type(author.position) == array {
           author.position.join(box(inset: (x: 0.5em), sym.dot.c))
         } else {
@@ -558,20 +561,23 @@
 
         #set text(fill: white, font: heading-font)
 
-        #text(size: 3em)[
-          #text(weight: "light")[#author.firstname]
-          #text(weight: "medium")[#author.lastname]
-        ]
+        #box[
+          #text(size: 3em)[
+            #text(weight: "light")[#author.firstname]
+            #text(weight: "medium")[#author.lastname]
+          ]
 
-        #v(-0.5em)
+          #v(-0.5em)
 
-        #text(
-          size: 0.95em,
-          fill: luma(200),
-          weight: "regular",
-        )[
-          #smallcaps(position)
+          #text(
+            size: 0.95em,
+            fill: luma(200),
+            weight: "regular",
+          )[
+            #smallcaps(position)
+          ]
         ]
+        #body
       ]
     ]
   }
