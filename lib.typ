@@ -759,6 +759,10 @@
     header-color: header-color,
     heading-font: heading-font,
     alignment: left,
+    body: {
+      h(100fr)
+      box(contact-info(), width: 27%)
+    },
   )
 
   v(HEADER_BODY_GAP)
