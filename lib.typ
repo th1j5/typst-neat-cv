@@ -533,6 +533,49 @@
     }
   }
 )
+#let head(
+  header-color: none,
+  heading-font: none,
+  author: none,
+) = {
+  context {
+    block(
+      width: 100%,
+      fill: header-color,
+      outset: (
+        left: page.margin.left,
+        right: page.margin.right,
+        top: page.margin.top,
+      ),
+      inset: (bottom: page.margin.top),
+    )[
+      #align(center)[
+        #let position = if type(author.position) == array {
+          author.position.join(box(inset: (x: 0.5em), sym.dot.c))
+        } else {
+          author.position
+        }
+
+        #set text(fill: white, font: heading-font)
+
+        #text(size: 3em)[
+          #text(weight: "light")[#author.firstname]
+          #text(weight: "medium")[#author.lastname]
+        ]
+
+        #v(-0.5em)
+
+        #text(
+          size: 0.95em,
+          fill: luma(200),
+          weight: "regular",
+        )[
+          #smallcaps(position)
+        ]
+      ]
+    ]
+  }
+}
 
 
 // ---- Main CV Template ----
@@ -650,46 +693,6 @@
   set par(spacing: 0.75em, justify: true)
   show footnote.entry: set text(size: FOOTER_FONT_SIZE_SCALE * 1.1em)
 
-  let head = {
-    context {
-      block(
-        width: 100%,
-        fill: header-color,
-        outset: (
-          left: page.margin.left,
-          right: page.margin.right,
-          top: page.margin.top,
-        ),
-        inset: (bottom: page.margin.top),
-      )[
-        #align(center)[
-          #let position = if type(author.position) == array {
-            author.position.join(box(inset: (x: 0.5em), sym.dot.c))
-          } else {
-            author.position
-          }
-
-          #set text(fill: white, font: heading-font)
-
-          #text(size: 3em)[
-            #text(weight: "light")[#author.firstname]
-            #text(weight: "medium")[#author.lastname]
-          ]
-
-          #v(-0.5em)
-
-          #text(
-            size: 0.95em,
-            fill: luma(200),
-            weight: "regular",
-          )[
-            #smallcaps(position)
-          ]
-        ]
-      ]
-    }
-  }
-
   let side-content = context {
     set text(size: SIDE_CONTENT_FONT_SIZE_SCALE * 1em)
     show heading: set text(font: heading-font, fill: accent-color, weight: "regular")
@@ -741,7 +744,7 @@
     v(1fr)
   }
 
-  head
+  head(author: author, header-color: header-color, heading-font: heading-font)
 
   v(HEADER_BODY_GAP)
 
