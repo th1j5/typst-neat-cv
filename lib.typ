@@ -589,13 +589,10 @@
 /// Main CV layout. Sets up theme, fonts, page, and structure.
 ///
 /// -> content
-#let cv(
+#let setup-layout(
   /// Author information (firstname, lastname, etc.)
   /// -> dictionary
   author: (:),
-  /// Profile picture
-  /// -> image | none
-  profile-picture: none,
   /// Accent color for highlights
   /// -> color
   accent-color: rgb("#408abb"),
@@ -698,6 +695,68 @@
 
   set par(spacing: 0.75em, justify: true)
   show footnote.entry: set text(size: FOOTER_FONT_SIZE_SCALE * 1.1em)
+
+  body
+}
+
+#let cv(
+  /// Author information (firstname, lastname, etc.)
+  /// -> dictionary
+  author: (:),
+  /// Profile picture
+  /// -> image | none
+  profile-picture: none,
+  /// Accent color for highlights
+  /// -> color
+  accent-color: rgb("#408abb"),
+  /// Main text color
+  /// -> color
+  font-color: rgb("#333333"),
+  /// Color for header background
+  /// -> color
+  header-color: luma(50),
+  /// Date string for footer
+  /// -> string
+  date: datetime.today().display("[month repr:long] [year]"),
+  /// Font for headings
+  /// -> string
+  heading-font: "Fira Sans",
+  /// Font(s) for body text
+  /// -> array
+  body-font: ("Noto Sans", "Roboto"),
+  /// Font size for body text
+  /// -> length
+  body-font-size: 10.5pt,
+  /// Paper size
+  /// -> string
+  paper-size: "us-letter",
+  /// Sidebar width
+  /// -> length
+  side-width: 4cm,
+  /// Add GDPR data usage in the footer
+  /// -> boolean
+  gdpr: false,
+  /// Optional custom footer
+  /// -> content | auto
+  footer: auto,
+  /// Main content of the CV
+  /// -> content
+  body,
+) = {
+  show: setup-layout.with(
+    author: author,
+    accent-color: accent-color,
+    font-color: font-color,
+    header-color: header-color,
+    date: date,
+    heading-font: heading-font,
+    body-font: body-font,
+    body-font-size: body-font-size,
+    paper-size: paper-size,
+    side-width: side-width,
+    gdpr: gdpr,
+    footer: footer,
+  )
 
   let side-content = context {
     set text(size: SIDE_CONTENT_FONT_SIZE_SCALE * 1em)
