@@ -767,6 +767,8 @@
 
   v(HEADER_BODY_GAP)
 
+  set par(spacing: 1.4em)
+  show heading: set block(spacing: auto)
   body
 }
 
