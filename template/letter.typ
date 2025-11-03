@@ -1,6 +1,4 @@
-#import "@preview/neat-cv:0.5.0": (
-  letter
-)
+#import "@preview/neat-cv:0.5.0": letter
 
 
 #show: letter.with(

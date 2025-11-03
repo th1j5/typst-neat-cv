@@ -889,10 +889,10 @@
           left: page.margin.left,
           right: page.margin.right,
           top: page.margin.top,
-          bottom: page.margin.top
+          bottom: page.margin.top,
         ),
         grid(
-          columns:(side-width, auto),
+          columns: (side-width, auto),
           gutter: page.margin.left,
           if profile-picture != none {
             block(
@@ -939,10 +939,10 @@
               text(
                 size: 8pt,
                 recipient,
-              )
+              ),
             )
-          ]
-        )
+          ],
+        ),
       )
     }
   }
