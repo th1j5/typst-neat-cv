@@ -129,10 +129,14 @@
     let levels = range(max-level).map(l => box(
       height: LEVEL_BAR_BOX_HEIGHT,
       width: 100%,
-      fill: if (l < level) {
-        _accent-color
-      },
       stroke: _accent-color + __stroke_length(0.75),
+      rect(
+        width: 100% * if      (level - l < 0) { 0 }
+                      else if (level - l > 1) { 1 }
+                      else                    { level - l },
+        height: 100%,
+        fill: _accent-color,
+      )
     ))
     grid(
       columns: (col-width,) * max-level,
