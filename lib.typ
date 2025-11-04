@@ -767,3 +767,200 @@
 ) = {
   context state("side-content").update(content)
 }
+
+// ---- Cover Letter Template ----
+//
+/// Cover Letter layout.
+#let letter(
+  /// Author information (firstname, lastname, etc.)
+  /// -> dictionary
+  author: (:),
+  /// Recipient address
+  /// -> content
+  recipient: [],
+  /// Profile picture
+  /// -> image | none
+  profile-picture: none,
+  /// Accent color for highlights
+  /// -> color
+  accent-color: rgb("#408abb"),
+  /// Main text color
+  /// -> color
+  font-color: rgb("#333333"),
+  /// Color for header background
+  /// -> color
+  header-color: luma(50),
+  /// Date string for footer
+  /// -> string
+  date: datetime.today().display("[month repr:long] [year]"),
+  /// Font for headings
+  /// -> string
+  heading-font: "Fira Sans",
+  /// Font(s) for body text
+  /// -> array
+  body-font: ("Noto Sans", "Roboto"),
+  /// Font size for body text
+  /// -> length
+  body-font-size: 10.5pt,
+  /// Paper size
+  /// -> string
+  paper-size: "us-letter",
+  /// Sidebar width
+  /// -> length
+  side-width: 4cm,
+  /// Optional custom footer
+  /// -> content | auto
+  footer: auto,
+  /// Main content of the CV
+  /// -> content
+  body,
+) = {
+  context {
+    __st-theme.update((
+      font-color: font-color,
+      accent-color: accent-color,
+      header-color: header-color,
+      fonts: (heading: heading-font, body: body-font),
+    ))
+
+    __st-author.update(author)
+  }
+
+  show: body => (
+    context {
+      set document(
+        title: "Cover Letter",
+        author: (
+          author.at("firstname", default: "")
+            + " "
+            + author.at("lastname", default: "")
+        ),
+      )
+
+      body
+    }
+  )
+
+  set text(
+    font: body-font,
+    size: body-font-size,
+    weight: "light",
+    fill: font-color,
+  )
+
+  set page(
+    paper: paper-size,
+    margin: PAGE_MARGIN,
+    footer: if footer == auto {
+      [
+        #set text(
+          size: FOOTER_FONT_SIZE_SCALE * 1em,
+          fill: font-color.lighten(50%),
+        )
+
+        #grid(
+          columns: (side-width, 1fr),
+          align: center,
+          gutter: HORIZONTAL_PAGE_MARGIN,
+          inset: 0pt,
+          [
+            #context counter(page).display("1 / 1", both: true)
+          ],
+          [
+            #author.firstname #author.lastname Cover Letter
+            #box(inset: (x: 0.3em / FOOTER_FONT_SIZE_SCALE), sym.dot.c)
+            #text(date)
+          ],
+
+          [],
+        )
+      ]
+    } else {
+      footer
+    },
+  )
+
+  set par(spacing: 0.75em, justify: true)
+
+  let head = {
+    context {
+      block(
+        inset: (
+          left: page.margin.left,
+          right: page.margin.right,
+          top: page.margin.top,
+          bottom: page.margin.top,
+        ),
+        grid(
+          columns: (side-width, auto),
+          gutter: page.margin.left,
+          if profile-picture != none {
+            block(
+              clip: true,
+              stroke: accent-color + __stroke_length(1),
+              radius: side-width / 2,
+              profile-picture,
+            )
+          },
+          block(
+            width: 100%,
+          )[
+            #align(left)[
+              #let position = if type(author.position) == array {
+                author.position.join(box(inset: (x: 0.5em), sym.dot.c))
+              } else {
+                author.position
+              }
+
+              #set text(fill: header-color, font: heading-font)
+
+              #text(size: 2em)[
+                #text(weight: "light")[#author.firstname]
+                #text(weight: "medium")[#author.lastname]
+              ]
+
+              #v(-0.5em)
+
+              #text(
+                size: 0.95em,
+                fill: luma(200),
+                weight: "regular",
+              )[
+                #smallcaps(position)
+              ]
+
+              #text(size: 8pt)[
+                #contact-info()
+              ]
+            ]
+
+            #align(
+              right,
+              text(
+                size: 8pt,
+                recipient,
+              ),
+            )
+          ],
+        ),
+      )
+    }
+  }
+
+  head
+
+  v(HEADER_BODY_GAP)
+
+  set par(
+    spacing: 1.20em,
+  )
+
+  block(
+    inset: (
+      left: 3cm,
+      right: 2cm,
+      top: 1cm,
+    ),
+    body,
+  )
+}
