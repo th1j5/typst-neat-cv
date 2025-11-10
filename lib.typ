@@ -208,6 +208,8 @@
   /// Location
   /// -> string
   location: "",
+  /// Compact layout (institution & location on same line)
+  compact: false,
   /// Description/details
   /// -> content
   description,
@@ -226,13 +228,13 @@
         #set text(size: 0.85em)
 
         #text(weight: "semibold", title)
-
         #text(size: 0.9em, smallcaps([
           #if institution != "" or location != "" [
+            #if compact { [ -- ] } else { parbreak() }
             //#text(institution, fill: theme.accent-color)
             #institution
-            #h(1fr)
             #if location != "" [
+              #h(1fr)
               #fa-icon("location-dot", size: 0.85em, fill: theme.accent-color)
               #location
             ]
