@@ -560,7 +560,13 @@
     )[
       #align(alignment)[
         #let position = if type(author.position) == array {
-          author.position.join(box(inset: (x: 0.5em), sym.dot.c))
+          if text.lang == "en" and body != none {
+            author.position.slice(0,2).join(box(inset: (x: 0.5em), sym.dot.c))
+            linebreak()
+            author.position.slice(2,4).join(box(inset: (x: 0.5em), sym.dot.c))
+          } else {
+            author.position.join(box(inset: (x: 0.5em), sym.dot.c))
+          }
         } else {
           author.position
         }
