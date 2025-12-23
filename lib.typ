@@ -878,16 +878,27 @@
   }
 
   let body-content = {
+    show heading: set text(font: heading-font, fill: accent-color, weight: "regular")
     show heading.where(level: 1): it => block(width: 100%)[
-      #set block(above: 1em)
+      #show: smallcaps
 
-      #text(
-        fill: accent-color,
-        weight: "regular",
-        font: heading-font,
-      )[#smallcaps(it.body)]
+      #it.body
       #box(width: 1fr, line(length: 100%, stroke: accent-color))
     ]
+    show heading.where(level: 2): set text(size: 0.95em)
+    show heading: it => {
+      // Clever trick to reduce spacing between consecutive headings
+      // See https://github.com/typst/typst/issues/2953
+      let previous_headings = query(selector(heading).before(here(), inclusive: false))
+      if previous_headings.len() > 0 {
+        let ploc = previous_headings.last().location().position()
+        let iloc = it.location().position()
+        if (iloc.page == ploc.page and iloc.x == ploc.x and iloc.y - ploc.y < 30pt) { // threshold
+          v(-0.5em) // amount to reduce spacing, could make this dependent on it.level
+        }
+      }
+      it
+    }
 
     body
 
