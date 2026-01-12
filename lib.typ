@@ -210,11 +210,13 @@
   location: "",
   /// Compact layout (institution & location on same line)
   compact: false,
+  /// Can be split over pages
+  breakable: true,
   /// Description/details
   /// -> content
   description,
 ) = {
-  context block(above: 1em, below: 0.65em)[
+  context block(above: 1em, below: 0.65em, breakable: breakable)[
     #let theme = __st-theme.final()
 
     #grid(
